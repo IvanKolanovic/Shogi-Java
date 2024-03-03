@@ -49,7 +49,8 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="tvz.ikolanovic.shogi.controllers.GameController">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
@@ -144,12 +145,12 @@
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="228.0" prefWidth="318.0">
                                  <children>
                                     <Label layoutX="14.0" layoutY="9.0" prefHeight="17.0" prefWidth="53.0" text="Chat" />
-                                    <Button fx:id="chat_send" layoutX="521.0" layoutY="506.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="61.0" text="Send" />
+                                    <Button fx:id="chatSendButton" layoutX="521.0" layoutY="506.0" mnemonicParsing="false" onMouseClicked="#sendMessage" prefHeight="36.0" prefWidth="61.0" text="Send" />
                                     <ScrollPane hbarPolicy="NEVER" layoutX="1.0" layoutY="37.0" prefHeight="400.0" prefWidth="600.0" vbarPolicy="ALWAYS">
                                       <content>
                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="600.0">
                                              <children>
-                                                <TextArea fx:id="chat_output" prefHeight="400.0" prefWidth="600.0" wrapText="true" />
+                                                <TextArea fx:id="chatOutputField" layoutX="-1.0" prefHeight="400.0" prefWidth="600.0" wrapText="true" />
                                              </children>
                                           </AnchorPane>
                                       </content>
@@ -158,7 +159,7 @@
                                       <content>
                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="475.0">
                                              <children>
-                                                <TextArea fx:id="chat_input" prefHeight="100.0" prefWidth="475.0" promptText="Write something..." wrapText="true" />
+                                                <TextArea fx:id="chatInputField" prefHeight="100.0" prefWidth="475.0" promptText="Write something..." wrapText="true" />
                                              </children>
                                           </AnchorPane>
                                       </content>

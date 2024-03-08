@@ -33,7 +33,8 @@ public class GameController
             alert.showAndWait();
         } else
         {
-            this.gameEngine.connectClientToGameServer(username);
+            //this.gameEngine.connectClientToGameServer(username);
+            this.gameEngine.setUpEmptyBoard();
         }
     }
 

@@ -27,7 +27,7 @@ public class ShogiGameEngine
     }
 
     @SneakyThrows
-    private void setUpEmptyBoard()
+    public void setUpEmptyBoard()
     {
         stage.close();
         FXMLLoader fxmlLoader = new FXMLLoader(ShogiBoardGame.class.getResource("board-game-dark.fxml"));

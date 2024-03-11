@@ -8,5 +8,7 @@ public class Rook extends Piece
         super("HI", owner, Boolean.FALSE, invert);
     }
 
+
+
 }
 

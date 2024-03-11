@@ -7,6 +7,7 @@ import javafx.stage.Stage;
 import lombok.SneakyThrows;
 import tvz.ikolanovic.shogi.controllers.GameController;
 import tvz.ikolanovic.shogi.engine.ShogiGameEngine;
+import tvz.ikolanovic.shogi.models.Board;
 
 import java.net.ServerSocket;
 
@@ -26,9 +27,7 @@ public class ShogiBoardGame extends Application
         stage.setTitle("Shogi - Enter username");
         stage.setScene(scene);
         stage.show();
-        ShogiGameEngine gameEngine = new ShogiGameEngine(stage);
-        GameController gameController = fxmlLoader.getController();
-        gameController.setGameEngine(gameEngine);
+        ShogiGameEngine.getInstance().setStage(stage);
     }
 
     public static void main(String[] args)

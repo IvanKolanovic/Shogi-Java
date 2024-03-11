@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import tvz.ikolanovic.shogi.models.Board;
-import tvz.ikolanovic.shogi.models.BoardSquare;
+import tvz.ikolanovic.shogi.models.Square;
 
 @Getter
 @Setter
@@ -14,31 +14,29 @@ import tvz.ikolanovic.shogi.models.BoardSquare;
 public abstract class Piece
 {
     private String symbol;
-
     private int owner;
-
     private boolean promoted;
     private boolean inverted;
 
 
-    public boolean canMove(BoardSquare from, BoardSquare to, Board b)
+    public boolean canMove(Square from, Square to, Board b)
     {
         return false;
     }
 
     public void promote()
     {
-        this.promoted = true;
-        //If a piece is "double promoted," don't add another "!" mark.
-        if (!this.symbol.substring(this.symbol.length() - 1).equals("!"))
-        {
-            this.symbol = this.symbol += "!";
-        }
+    }
+
+    public String getSymbol()
+    {
+        if (inverted)
+            return 1 + symbol;
+        else
+            return 0 + symbol;
     }
 
     public void demote()
     {
-        this.promoted = false;
-        this.symbol = this.symbol.split("!")[0];
     }
 }

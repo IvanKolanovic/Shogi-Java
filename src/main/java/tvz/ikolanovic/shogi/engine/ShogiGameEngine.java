@@ -4,30 +4,41 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.SneakyThrows;
 import tvz.ikolanovic.shogi.ShogiBoardGame;
-import tvz.ikolanovic.shogi.controllers.GameController;
 import tvz.ikolanovic.shogi.engine.sockets.Client;
+import tvz.ikolanovic.shogi.models.Board;
 
 import java.net.Socket;
 
-@NoArgsConstructor
 @Getter
 @Setter
 public class ShogiGameEngine
 {
+    private static ShogiGameEngine INSTANCE;
     private Stage stage;
     private Client myClient;
+    private Board gameBoard;
 
-    public ShogiGameEngine(Stage stage)
+
+    private ShogiGameEngine()
     {
-        this.stage = stage;
+        this.gameBoard = new Board();
+    }
+
+    public static ShogiGameEngine getInstance()
+    {
+        if (INSTANCE == null)
+        {
+            INSTANCE = new ShogiGameEngine();
+        }
+
+        return INSTANCE;
     }
 
     @SneakyThrows
-    public void setUpEmptyBoard()
+    public void setUpBoard()
     {
         stage.close();
         FXMLLoader fxmlLoader = new FXMLLoader(ShogiBoardGame.class.getResource("board-game-dark.fxml"));
@@ -40,9 +51,9 @@ public class ShogiGameEngine
     @SneakyThrows
     public void connectClientToGameServer(String username)
     {
-        Socket socket = new Socket("localhost",1234);
-        this.myClient = new Client(socket,username);
+        Socket socket = new Socket("localhost", 1234);
+        this.myClient = new Client(socket, username);
         this.myClient.listenForMessage();
-        this.setUpEmptyBoard();
+        this.setUpBoard();
     }
 }

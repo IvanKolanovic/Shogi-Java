@@ -1,11 +1,15 @@
 package tvz.ikolanovic.shogi.controllers;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
 import lombok.Getter;
 import lombok.Setter;
+import tvz.ikolanovic.shogi.ShogiBoardGame;
 import tvz.ikolanovic.shogi.engine.ShogiGameEngine;
 
 @Getter
@@ -16,8 +20,9 @@ public class GameController
     private TextField usernameField;
     @FXML
     private TextArea chatInputField;
+    @FXML
+    private BoardController boardController;
 
-    private ShogiGameEngine gameEngine;
 
     @FXML
     private void onConfirmUsername()
@@ -33,17 +38,8 @@ public class GameController
             alert.showAndWait();
         } else
         {
-            //this.gameEngine.connectClientToGameServer(username);
-            this.gameEngine.setUpEmptyBoard();
+          ShogiGameEngine.getInstance().setUpBoard();
         }
     }
 
-    @FXML
-    private void sendMessage()
-    {
-        String message = chatInputField.getText();
-
-        if (message != null || !message.isEmpty())
-            this.gameEngine.getMyClient().sendMessage(message);
-    }
 }

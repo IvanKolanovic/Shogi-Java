@@ -3,66 +3,33 @@ package tvz.ikolanovic.shogi.models.pieces;
 import tvz.ikolanovic.shogi.models.Board;
 import tvz.ikolanovic.shogi.models.Square;
 
-public class Pawn extends Piece
-{
+import java.util.ArrayList;
+import java.util.List;
 
-    public Pawn(int owner, boolean invert)
-    {
+public class Pawn extends Piece {
+
+    public Pawn(int owner, boolean invert) {
         super("FU", owner, Boolean.FALSE, invert);
     }
 
-    public boolean canMove(Square from, Square to, Board b)
-    {
-        if (isPromoted())
-        {
-            //Gold movement code
-            if ((Math.abs(from.getRow() - to.getRow()) <= 1 &&
-                    (Math.abs(from.getColumn() - to.getColumn()) <= 1)))
-            {
-                if (getOwner() == 1)
-                {
-                    //If Piece is moving backwards check for diagonal
-                    if (from.getRow() - to.getRow() == 1)
-                    {
-                        if (from.getColumn() != to.getColumn())
-                        {
-                            return false;
-                        }
-                    }
-                } else if (getOwner() == 2)
-                {
-                    //If Piece is moving backwards check for diagonal
-                    if (from.getRow() - to.getRow() == -1)
-                    {
-                        if (from.getColumn() != to.getColumn())
-                        {
-                            return false;
-                        }
-                    }
-                }
-                if (to.getPiece() != null)
-                {
-                    return from.getPiece().getOwner() != to.getPiece().getOwner();
-                }
-                return true;
-            }
-            return false;
-        }
+    @Override
+    public List<Square> getPossibleMoves(int x, int y, Board board) {
+        List<Square> squares = new ArrayList<>();
 
-        //Pawn Basic Move
-        if (getOwner() == 1 && from.getRow() - to.getRow() == -1 ||
-                getOwner() == 2 && from.getRow() - to.getRow() == 1)
-        {
-            if (from.getColumn() == to.getColumn())
-            {
-                if (to.getPiece() != null)
-                {
-                    return from.getPiece().getOwner() != to.getPiece().getOwner();
-                }
-                return true;
+        // Determine the direction based on the piece's side
+        int direction = this.isInverted() ? 1 : -1; // Assuming white pieces move "up" and black pieces move "down"
+
+        int targetX = x + direction;
+
+        // Check if the move is within the board and the target cell is empty or contains an opponent's piece
+        if (targetX >= 0 && targetX < 9) { // Assuming 0-indexed board
+            Square targetSquare = board.getSquare(targetX, y);
+            Piece targetPiece = targetSquare == null ? null : targetSquare.getPiece();
+            if (targetPiece == null || targetPiece.getOwner() != this.getOwner()) { // Can move or capture
+                squares.add(new Square(targetX, y, targetPiece));
             }
         }
 
-        return false;
+        return squares;
     }
 }

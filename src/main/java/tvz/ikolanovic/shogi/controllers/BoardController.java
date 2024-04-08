@@ -30,6 +30,7 @@ public class BoardController
             // click on descendant node
             Integer colIndex = GridPane.getColumnIndex(clickedNode);
             Integer rowIndex = GridPane.getRowIndex(clickedNode);
+            ShogiGameEngine.getInstance().getGameBoard().pieceClicked(rowIndex,colIndex,boardGrid);
             System.out.println("Row= " + rowIndex + " Column: " + colIndex);
         }
     }

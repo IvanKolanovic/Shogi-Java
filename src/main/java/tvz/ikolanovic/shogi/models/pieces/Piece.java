@@ -7,36 +7,33 @@ import lombok.Setter;
 import tvz.ikolanovic.shogi.models.Board;
 import tvz.ikolanovic.shogi.models.Square;
 
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public abstract class Piece
-{
+public abstract class Piece {
     private String symbol;
     private int owner;
     private boolean promoted;
     private boolean inverted;
 
-
-    public boolean canMove(Square from, Square to, Board b)
-    {
-        return false;
+    // Define a method to get possible moves, to be overridden by subclasses
+    public List<Square> getPossibleMoves(int x, int y, Board board) {
+        return null;
     }
 
-    public void promote()
-    {
+    public void promote() {
     }
 
-    public String getSymbol()
-    {
+    public String getSymbol() {
         if (inverted)
             return 1 + symbol;
         else
             return 0 + symbol;
     }
 
-    public void demote()
-    {
+    public void demote() {
     }
 }

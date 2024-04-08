@@ -3,75 +3,45 @@ package tvz.ikolanovic.shogi.models.pieces;
 import tvz.ikolanovic.shogi.models.Board;
 import tvz.ikolanovic.shogi.models.Square;
 
-public class Knight extends Piece
-{
+import java.util.ArrayList;
+import java.util.List;
 
-    public Knight(int owner, boolean invert)
-    {
+public class Knight extends Piece {
+
+    public Knight(int owner, boolean invert) {
         super("KE", owner, Boolean.FALSE, invert);
     }
 
-    public boolean canMove(Square from, Square to, Board b)
-    {
-        if (isPromoted())
-        {
-            //Gold movement code
-            if ((Math.abs(from.getRow() - to.getRow()) <= 1 &&
-                    (Math.abs(from.getColumn() - to.getColumn()) <= 1)))
-            {
-                if (getOwner() == 1)
-                {
-                    //If Piece is moving backwards check for diagonal
-                    if (from.getRow() - to.getRow() == 1)
-                    {
-                        if (from.getColumn() != to.getColumn())
-                        {
-                            return false;
-                        }
-                    }
-                } else if (getOwner() == 2)
-                {
-                    //If Piece is moving backwards check for diagonal
-                    if (from.getRow() - to.getRow() == -1)
-                    {
-                        if (from.getColumn() != to.getColumn())
-                        {
-                            return false;
-                        }
-                    }
+    @Override
+    public List<Square> getPossibleMoves(int x, int y, Board board) {
+        List<Square> squares = new ArrayList<>();
+
+        // Determine the forward direction based on the piece's side
+        int direction = this.isInverted() ? 1 : -1; // Assuming white pieces move "up" and black pieces move "down"
+
+        // Calculate the two potential moves
+        int[][] potentialMoves = {
+                {2 * direction, -1}, // Two forward, one left
+                {2 * direction, 1},  // Two forward, one right
+        };
+
+        for (int[] move : potentialMoves) {
+            int nextX = x + move[0];
+            int nextY = y + move[1];
+
+            // Ensure the move is within the board boundaries
+            if (nextX >= 0 && nextX < 9 && nextY >= 0 && nextY < 9) {
+                Square targetSquare = board.getSquare(nextX, nextY);
+                Piece targetPiece = targetSquare == null ? null : targetSquare.getPiece();
+
+                // The square is either empty or contains an opponent's piece (capture)
+                if (targetPiece == null || targetPiece.getOwner() != this.getOwner()) {
+                    squares.add(new Square(nextX, nextY, targetPiece));
                 }
-                if (to.getPiece() != null)
-                {
-                    return from.getPiece().getOwner() != to.getPiece().getOwner();
-                }
-                return true;
-            }
-            return false;
-        }
-
-        if (getOwner() == 2)
-        {
-            //Check if moving up two squares
-            if (from.getRow() - to.getRow() != 2 || Math.abs(from.getColumn() - to.getColumn()) != 1)
-            {
-                return false;
-            }
-        }
-        if (getOwner() == 1)
-        {
-            //Check if moving down two squares
-            if (from.getRow() - to.getRow() != -2 || Math.abs(from.getColumn() - to.getColumn()) != 1)
-            {
-                return false;
             }
         }
 
-        if (to.getPiece() != null)
-        {
-            return from.getPiece().getOwner() != to.getPiece().getOwner();
-        }
-
-        return true;
+        return squares;
     }
 
 }

@@ -6,8 +6,17 @@ import tvz.ikolanovic.shogi.models.Square;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Pawn.
+ */
 public class Pawn extends Piece {
 
+    /**
+     * Instantiates a new Pawn.
+     *
+     * @param owner  the owner
+     * @param invert the invert
+     */
     public Pawn(int owner, boolean invert) {
         super("FU", owner, Boolean.FALSE, invert);
     }
@@ -31,5 +40,8 @@ public class Pawn extends Piece {
         }
 
         return squares;
+    }
+    public String getAcronym() {
+        return "P";
     }
 }

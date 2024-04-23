@@ -10,9 +10,6 @@ module tvz.ikolanovic.shogi {
     exports tvz.ikolanovic.shogi;
     exports tvz.ikolanovic.shogi.controllers;
     exports tvz.ikolanovic.shogi.engine;
-    exports tvz.ikolanovic.shogi.engine.sockets;
-    exports tvz.ikolanovic.shogi.engine.sockets.interfaces;
-
 
     opens tvz.ikolanovic.shogi.controllers to javafx.fxml;
 }

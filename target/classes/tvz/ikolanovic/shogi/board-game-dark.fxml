@@ -139,6 +139,45 @@
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="450.0" prefWidth="494.0">
                                  <children>
                                     <Label layoutX="14.0" layoutY="21.0" prefHeight="20.0" prefWidth="102.0" text="Statistics" />
+                                    <ScrollPane hbarPolicy="NEVER" layoutX="230.0" layoutY="41.0" pannable="true" prefHeight="158.0" prefWidth="143.0" vbarPolicy="NEVER">
+                                       <content>
+                                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="156.0" prefWidth="600.0">
+                                             <children>
+                                                <TextArea fx:id="statOutput" editable="false" layoutX="-5.0" prefHeight="158.0" prefWidth="149.0" style="-fx-opacity: 1;" wrapText="true" />
+                                             </children>
+                                          </AnchorPane>
+                                       </content>
+                                    </ScrollPane>
+                                    <Label layoutX="147.0" layoutY="217.0" prefHeight="20.0" prefWidth="61.0" text="Player 1" />
+                                    <Label layoutX="145.0" layoutY="251.0" prefHeight="20.0" prefWidth="45.0" text="Pawn =" />
+                                    <Label layoutX="145.0" layoutY="271.0" prefHeight="20.0" prefWidth="45.0" text="Lance =" />
+                                    <Label layoutX="145.0" layoutY="291.0" prefHeight="20.0" prefWidth="53.0" text="Knight =" />
+                                    <Label layoutX="145.0" layoutY="311.0" prefHeight="20.0" prefWidth="86.0" text="Silver General =" />
+                                    <Label layoutX="145.0" layoutY="331.0" prefHeight="20.0" prefWidth="86.0" text="Gold General =" />
+                                    <Label layoutX="147.0" layoutY="351.0" prefHeight="20.0" prefWidth="53.0" text="Bishop =" />
+                                    <Label layoutX="147.0" layoutY="371.0" prefHeight="20.0" prefWidth="45.0" text="Rook =" />
+                                    <Label layoutX="373.0" layoutY="215.0" prefHeight="20.0" prefWidth="102.0" text="Player 2" />
+                                    <Label fx:id="P0" layoutX="192.0" layoutY="253.0" text="0" />
+                                    <Label fx:id="L0" layoutX="197.0" layoutY="273.0" text="0" />
+                                    <Label fx:id="N0" layoutX="201.0" layoutY="293.0" text="0" />
+                                    <Label fx:id="S0" layoutX="237.0" layoutY="314.0" text="0" />
+                                    <Label fx:id="G0" layoutX="234.0" layoutY="333.0" text="0" />
+                                    <Label fx:id="B0" layoutX="201.0" layoutY="353.0" text="0" />
+                                    <Label fx:id="R0" layoutX="191.0" layoutY="374.0" text="0" />
+                                    <Label layoutX="375.0" layoutY="244.0" prefHeight="20.0" prefWidth="45.0" text="Pawn =" />
+                                    <Label layoutX="375.0" layoutY="264.0" prefHeight="20.0" prefWidth="45.0" text="Lance =" />
+                                    <Label layoutX="375.0" layoutY="284.0" prefHeight="20.0" prefWidth="53.0" text="Knight =" />
+                                    <Label layoutX="375.0" layoutY="304.0" prefHeight="20.0" prefWidth="86.0" text="Silver General =" />
+                                    <Label layoutX="375.0" layoutY="324.0" prefHeight="20.0" prefWidth="86.0" text="Gold General =" />
+                                    <Label layoutX="377.0" layoutY="344.0" prefHeight="20.0" prefWidth="53.0" text="Bishop =" />
+                                    <Label layoutX="377.0" layoutY="364.0" prefHeight="20.0" prefWidth="45.0" text="Rook =" />
+                                    <Label fx:id="P1" layoutX="422.0" layoutY="246.0" text="0" />
+                                    <Label fx:id="L1" layoutX="427.0" layoutY="266.0" text="0" />
+                                    <Label fx:id="N1" layoutX="431.0" layoutY="286.0" text="0" />
+                                    <Label fx:id="S1" layoutX="467.0" layoutY="307.0" text="0" />
+                                    <Label fx:id="G1" layoutX="464.0" layoutY="326.0" text="0" />
+                                    <Label fx:id="B1" layoutX="431.0" layoutY="346.0" text="0" />
+                                    <Label fx:id="R1" layoutX="421.0" layoutY="367.0" text="0" />
                                  </children>
                               </AnchorPane>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="228.0" prefWidth="318.0">
@@ -149,7 +188,7 @@
                                       <content>
                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="600.0">
                                              <children>
-                                                <TextArea fx:id="chatOutputField" layoutX="-1.0" prefHeight="400.0" prefWidth="600.0" wrapText="true" />
+                                                <TextArea fx:id="chatOutputField" disable="true" layoutX="-1.0" prefHeight="400.0" prefWidth="600.0" wrapText="true" />
                                              </children>
                                           </AnchorPane>
                                       </content>

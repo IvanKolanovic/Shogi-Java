@@ -11,6 +11,9 @@ import tvz.ikolanovic.shogi.models.Board;
 
 import java.net.ServerSocket;
 
+/**
+ * The type Shogi board game.
+ */
 public class ShogiBoardGame extends Application
 {
     @Override
@@ -19,6 +22,11 @@ public class ShogiBoardGame extends Application
         this.initialize(stage);
     }
 
+    /**
+     * Initialize.
+     *
+     * @param stage the stage
+     */
     @SneakyThrows
     public void initialize(Stage stage)
     {
@@ -30,6 +38,11 @@ public class ShogiBoardGame extends Application
         ShogiGameEngine.getInstance().setStage(stage);
     }
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args)
     {
         launch();

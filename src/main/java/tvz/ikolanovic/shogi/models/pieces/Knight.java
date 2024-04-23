@@ -6,8 +6,17 @@ import tvz.ikolanovic.shogi.models.Square;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Knight.
+ */
 public class Knight extends Piece {
 
+    /**
+     * Instantiates a new Knight.
+     *
+     * @param owner  the owner
+     * @param invert the invert
+     */
     public Knight(int owner, boolean invert) {
         super("KE", owner, Boolean.FALSE, invert);
     }
@@ -43,6 +52,8 @@ public class Knight extends Piece {
 
         return squares;
     }
-
+    public String getAcronym() {
+        return "N";
+    }
 }
 

@@ -12,6 +12,9 @@ import lombok.Setter;
 import tvz.ikolanovic.shogi.ShogiBoardGame;
 import tvz.ikolanovic.shogi.engine.ShogiGameEngine;
 
+/**
+ * The type Game controller.
+ */
 @Getter
 @Setter
 public class GameController

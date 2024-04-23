@@ -7,18 +7,18 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.SneakyThrows;
 import tvz.ikolanovic.shogi.ShogiBoardGame;
-import tvz.ikolanovic.shogi.engine.sockets.Client;
 import tvz.ikolanovic.shogi.models.Board;
 
-import java.net.Socket;
 
+/**
+ * The type Shogi game engine.
+ */
 @Getter
 @Setter
 public class ShogiGameEngine
 {
     private static ShogiGameEngine INSTANCE;
     private Stage stage;
-    private Client myClient;
     private Board gameBoard;
 
 
@@ -27,6 +27,11 @@ public class ShogiGameEngine
         this.gameBoard = new Board();
     }
 
+    /**
+     * Gets instance.
+     *
+     * @return the instance
+     */
     public static ShogiGameEngine getInstance()
     {
         if (INSTANCE == null)
@@ -37,6 +42,9 @@ public class ShogiGameEngine
         return INSTANCE;
     }
 
+    /**
+     * Sets up board.
+     */
     @SneakyThrows
     public void setUpBoard()
     {
@@ -46,14 +54,5 @@ public class ShogiGameEngine
         this.stage.setTitle("Shogi - Japanese Chess");
         this.stage.setScene(scene);
         this.stage.show();
-    }
-
-    @SneakyThrows
-    public void connectClientToGameServer(String username)
-    {
-        Socket socket = new Socket("localhost", 1234);
-        this.myClient = new Client(socket, username);
-        this.myClient.listenForMessage();
-        this.setUpBoard();
     }
 }

@@ -58,7 +58,7 @@ public abstract class Piece {
      *
      * @return the string
      */
-    public String getAcronym(){
+    public String getAcronym() {
         return null;
     }
 
@@ -66,5 +66,9 @@ public abstract class Piece {
      * Demote.
      */
     public void demote() {
+    }
+
+    public boolean canMoveTo(List<Square> possibleMoves, int kingRow, int kingCol) {
+        return possibleMoves.stream().anyMatch(move -> move.getRow() == kingRow && move.getColumn() == kingCol);
     }
 }

@@ -35,6 +35,7 @@ public class Board {
     private List<HighlightedCoordinate> highlightedCoordinates;
     private Square selectedSquarePiece;
     private Vector<String> moveHistory = new Vector<>();
+    private Boolean isOpponentsTurn;
 
     /**
      * Instantiates a new Board.
@@ -43,6 +44,32 @@ public class Board {
         this.squares = new Square[9][9];
         this.selectedSquarePiece = new Square(-1, -1, null); // default non-existing square
         this.highlightedCoordinates = new ArrayList<>();
+        this.isOpponentsTurn = Boolean.FALSE;
+    }
+
+    public void gameLogic(Node clickedNode, GridPane boardGrid, TextArea statOutput) {
+        // click on descendant node
+        Integer row = GridPane.getRowIndex(clickedNode);
+        Integer column = GridPane.getColumnIndex(clickedNode);
+        System.out.println("Row: " + row + " Column: " + column);
+
+        if (ShogiGameEngine.getInstance().getGameBoard().canMovePiece(row, column)) {
+            if (this.checkIfMyTurn())
+                ShogiGameEngine.getInstance().getGameBoard().movePieceToSquare(row, column, boardGrid, statOutput);
+        } else {
+            ShogiGameEngine.getInstance().getGameBoard().pieceClicked(row, column, boardGrid);
+        }
+        if(isCheckMate()){
+            System.out.println();
+        }
+    }
+
+    public boolean checkIfMyTurn() {
+        if (isOpponentsTurn && this.selectedSquarePiece.getPiece().getOwner() == 0)
+            return Boolean.FALSE;
+        else if (!isOpponentsTurn && this.selectedSquarePiece.getPiece().getOwner() == 1)
+            return Boolean.FALSE;
+        return Boolean.TRUE;
     }
 
     /**
@@ -108,9 +135,6 @@ public class Board {
         boolean isOnHighlighted = this.highlightedCoordinates.stream().anyMatch(highlightedCoordinate ->
                 highlightedCoordinate.row() == row && highlightedCoordinate.column() == col);
 
-//        if (square.getPiece() != null && square.getPiece().getOwner() == 0)
-//            return Boolean.FALSE;
-
         return isOnHighlighted
                 && selectedSquarePiece.getRow() != -1
                 && selectedSquarePiece.getColumn() != -1;
@@ -125,6 +149,11 @@ public class Board {
      */
     public Square getSquare(int row, int column) {
         return squares[row][column];
+    }
+
+    public boolean isSelectedSquareNonDefault() {
+        return selectedSquarePiece.getRow() != -1
+                && selectedSquarePiece.getColumn() != -1;
     }
 
     private void populateAllEmptySquares(GridPane boardGrid) {
@@ -210,6 +239,7 @@ public class Board {
         // add new
         boardGrid.add(imageView, newColumn, newRow);
         this.setPieceOnBoard(boardGrid, newRow, newColumn, oldSquare.getPiece());
+        this.isOpponentsTurn = !this.isOpponentsTurn;
     }
 
     /**
@@ -287,4 +317,81 @@ public class Board {
         imageView.setFitHeight(65);
         boardGrid.add(imageView, col, row);
     }
+    public boolean isCheck() {
+        // Find the king first
+        Square kingSquare = findKingSquare();
+        if (kingSquare == null) return false; // No king found, something went wrong
+
+        int kingRow = kingSquare.getRow();
+        int kingCol = kingSquare.getColumn();
+        // Check threats from all pieces of the opposing side
+        for (int row = 0; row < SIZE; row++) {
+            for (int col = 0; col < SIZE; col++) {
+                Piece piece = squares[row][col].getPiece();
+                if (piece != null && piece.isInverted() != isOpponentsTurn) { // Check opposing pieces
+                    if (piece.canMoveTo(piece.getPossibleMoves(row,col,this),kingRow, kingCol)) {
+                        return true; // King is in check
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    private Square findKingSquare() {
+        // Assuming king isBlack value matches the turn, modify as per your setup
+        for (int row = 0; row < SIZE; row++) {
+            for (int col = 0; col < SIZE; col++) {
+                Piece piece = squares[row][col].getPiece();
+                if (piece instanceof King && piece.isInverted() == isOpponentsTurn) {
+                    return squares[row][col];
+                }
+            }
+        }
+        return null;
+    }
+
+    public boolean isCheckMate() {
+        if (!isCheck()) return false; // Not in check, thus not checkmate
+
+        Square kingSquare = findKingSquare();
+        if (kingSquare == null) return false; // No king found, something went wrong
+
+        int kingRow = kingSquare.getRow();
+        int kingCol = kingSquare.getColumn();
+        int[] rowOffsets = {-1, -1, -1, 0, 0, 1, 1, 1};
+        int[] colOffsets = {-1, 0, 1, -1, 1, -1, 0, 1};
+
+        // Try all moves the king can make to escape check
+        for (int i = 0; i < rowOffsets.length; i++) {
+            int newRow = kingRow + rowOffsets[i];
+            int newCol = kingCol + colOffsets[i];
+            if (newRow >= 0 && newRow < SIZE && newCol >= 0 && newCol < SIZE) {
+                if (canKingMoveTo(kingSquare, squares[newRow][newCol])) {
+                    // Temporarily move the king
+                    Piece tempPiece = squares[newRow][newCol].getPiece();
+                    squares[newRow][newCol].setPiece(squares[kingRow][kingCol].getPiece());
+                    squares[kingRow][kingCol].setPiece(null);
+                    boolean stillInCheck = isCheck(); // Check if the king is still in check
+                    // Undo the move
+                    squares[kingRow][kingCol].setPiece(squares[newRow][newCol].getPiece());
+                    squares[newRow][newCol].setPiece(tempPiece);
+
+                    if (!stillInCheck) return false; // King can escape check
+                }
+            }
+        }
+        return true; // No moves can remove the king from check
+    }
+
+    private boolean canKingMoveTo(Square from, Square to) {
+        // Check if the square is occupied by a friendly piece
+        if (to.getPiece() != null && to.getPiece().isInverted() == from.getPiece().isInverted()) {
+            return false;
+        }
+        // Check if the move is within one square range
+        return Math.abs(from.getRow() - to.getRow()) <= 1 && Math.abs(from.getColumn() - to.getColumn()) <= 1;
+    }
+
+
 }

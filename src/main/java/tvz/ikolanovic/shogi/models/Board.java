@@ -15,6 +15,7 @@ import lombok.Getter;
 import lombok.Setter;
 import tvz.ikolanovic.shogi.engine.ShogiGameEngine;
 import tvz.ikolanovic.shogi.models.pieces.*;
+import tvz.ikolanovic.shogi.models.utils.DialogUtils;
 import tvz.ikolanovic.shogi.models.utils.HighlightedCoordinate;
 
 import java.util.ArrayList;
@@ -31,7 +32,7 @@ public class Board {
      * The constant SIZE.
      */
     public static final int SIZE = 9;
-    private Square[][] squares;
+    public static Square[][] squares;
     private List<HighlightedCoordinate> highlightedCoordinates;
     private Square selectedSquarePiece;
     private Vector<String> moveHistory = new Vector<>();
@@ -56,11 +57,13 @@ public class Board {
         if (ShogiGameEngine.getInstance().getGameBoard().canMovePiece(row, column)) {
             if (this.checkIfMyTurn())
                 ShogiGameEngine.getInstance().getGameBoard().movePieceToSquare(row, column, boardGrid, statOutput);
+
         } else {
             ShogiGameEngine.getInstance().getGameBoard().pieceClicked(row, column, boardGrid);
         }
-        if(isCheckMate()){
-            System.out.println();
+        if(isCheck()){
+            System.out.println("King is in Check!");
+            DialogUtils.showWinningDialog(isOpponentsTurn ? "Player 1" : "Player 2");
         }
     }
 
@@ -77,49 +80,49 @@ public class Board {
      *
      * @param boardGrid the board grid
      */
-    public void populateBoard(GridPane boardGrid) {
+    public static void populateBoard(GridPane boardGrid) {
         boardGrid.setAlignment(Pos.CENTER);
         for (int row = 0; row < SIZE; row++) {
-            this.checkAndBuildMiddleRow(boardGrid, row);
+            checkAndBuildMiddleRow(boardGrid, row);
             for (int col = 0; col < SIZE; col++) {
-                this.checkAndBuildBackRow(boardGrid, row, col);
-                this.checkAndBuildFrontRow(boardGrid, row, col);
+               checkAndBuildBackRow(boardGrid, row, col);
+               checkAndBuildFrontRow(boardGrid, row, col);
             }
         }
-        this.populateAllEmptySquares(boardGrid);
+        populateAllEmptySquares(boardGrid);
     }
 
-    private void checkAndBuildMiddleRow(GridPane boardGrid, int row) {
+    public static void checkAndBuildMiddleRow(GridPane boardGrid, int row) {
         if (row == 1) {
-            this.setPieceOnBoard(boardGrid, row, 1, new Rook(1, Boolean.TRUE));
-            this.setPieceOnBoard(boardGrid, row, 7, new Bishop(1, Boolean.TRUE));
+            setPieceOnBoard(boardGrid, row, 1, new Rook(1, Boolean.TRUE));
+            setPieceOnBoard(boardGrid, row, 7, new Bishop(1, Boolean.TRUE));
         } else if (row == 7) {
-            this.setPieceOnBoard(boardGrid, row, 1, new Bishop(0, Boolean.FALSE));
-            this.setPieceOnBoard(boardGrid, row, 7, new Rook(0, Boolean.FALSE));
+            setPieceOnBoard(boardGrid, row, 1, new Bishop(0, Boolean.FALSE));
+            setPieceOnBoard(boardGrid, row, 7, new Rook(0, Boolean.FALSE));
         }
     }
 
-    private void checkAndBuildFrontRow(GridPane boardGrid, int row, int col) {
+    public static void checkAndBuildFrontRow(GridPane boardGrid, int row, int col) {
         if (row == 2 || row == 6) {
             boolean isOppositePlayer = row == 2 ? Boolean.TRUE : Boolean.FALSE;
             int owner = isOppositePlayer ? 1 : 0;
-            this.setPieceOnBoard(boardGrid, row, col, new Pawn(owner, isOppositePlayer));
+            setPieceOnBoard(boardGrid, row, col, new Pawn(owner, isOppositePlayer));
         }
     }
 
-    private void checkAndBuildBackRow(GridPane boardGrid, int row, int col) {
+    public static void checkAndBuildBackRow(GridPane boardGrid, int row, int col) {
         if (row == 0 || row == 8) {
             boolean isOppositePlayer = row == 0 ? Boolean.TRUE : Boolean.FALSE;
             int owner = isOppositePlayer ? 1 : 0;
 
-            if (col == 0 || col == 8) this.setPieceOnBoard(boardGrid, row, col, new Lance(owner, isOppositePlayer));
+            if (col == 0 || col == 8) setPieceOnBoard(boardGrid, row, col, new Lance(owner, isOppositePlayer));
             else if (col == 1 || col == 7)
-                this.setPieceOnBoard(boardGrid, row, col, new Knight(owner, isOppositePlayer));
+                setPieceOnBoard(boardGrid, row, col, new Knight(owner, isOppositePlayer));
             else if (col == 2 || col == 6)
-                this.setPieceOnBoard(boardGrid, row, col, new SilverGeneral(owner, isOppositePlayer));
+                setPieceOnBoard(boardGrid, row, col, new SilverGeneral(owner, isOppositePlayer));
             else if (col == 3 || col == 5)
-                this.setPieceOnBoard(boardGrid, row, col, new GoldGeneral(owner, isOppositePlayer));
-            else this.setPieceOnBoard(boardGrid, row, col, new King(owner, isOppositePlayer));
+                setPieceOnBoard(boardGrid, row, col, new GoldGeneral(owner, isOppositePlayer));
+            else setPieceOnBoard(boardGrid, row, col, new King(owner, isOppositePlayer));
         }
     }
 
@@ -156,11 +159,11 @@ public class Board {
                 && selectedSquarePiece.getColumn() != -1;
     }
 
-    private void populateAllEmptySquares(GridPane boardGrid) {
+    public static void populateAllEmptySquares(GridPane boardGrid) {
         for (int row = 0; row < SIZE; row++) {
             for (int col = 0; col < SIZE; col++) {
                 if (squares[row][col] == null) {
-                    this.setEmptyPieceOnBoard(boardGrid, row, col);
+                    setEmptyPieceOnBoard(boardGrid, row, col);
                 }
             }
         }
@@ -177,25 +180,34 @@ public class Board {
         Square selectedSquare = this.getSquare(x, y);
         Piece piece = selectedSquare.getPiece();
         if (piece != null) {
-            if (piece != selectedSquarePiece.getPiece()) this.clearHighlighting(boardGrid);
+            if (piece != selectedSquarePiece.getPiece()) {
+                this.clearHighlighting(boardGrid);
+            }
 
-            List<Square> possibleMoves = piece.getPossibleMoves(x, y, this); // You need to implement getPossibleMoves
+            List<Square> possibleMoves = piece.getPossibleMoves(x, y, this);
 
             for (Square square : possibleMoves) {
                 int targetX = square.getRow();
                 int targetY = square.getColumn();
 
-                // Find the button or cell in your GridPane corresponding to this position
                 ImageView imageView = (ImageView) this.getNodeByRowColumnIndex(targetX, targetY, boardGrid);
-                if (square.getPiece() == null)
-                    imageView.setImage(new Image("File:pieces/yellow.png"));
-                else
-                    imageView.setEffect(new DropShadow(20, Color.RED));
+                if (imageView == null) {
+                    System.out.println("ImageView is null at position: (" + targetX + ", " + targetY + ")");
+                    continue;
+                }
+
+                // Apply drop shadow effect to the image view
+                imageView.setEffect(new DropShadow(20, Color.RED));
+                imageView.setImage(new Image("File:pieces/yellow.png"));
+
+
+                // Add the highlighted coordinate
                 highlightedCoordinates.add(new HighlightedCoordinate(targetX, targetY));
             }
             this.setSelectedSquarePiece(selectedSquare);
         }
     }
+
 
     /**
      * Move piece to square.
@@ -261,7 +273,7 @@ public class Board {
                     oldSquare.getColumn(), newRow, newColumn);
             moveHistory.add(txt);
             statOutput.appendText(txt);
-        } else if (target.getPiece() != null) {
+        } else {
             String txt = String.format("%s%d%dx%s%d%d%n", oldSquare.getPiece().getAcronym(), oldSquare.getRow(),
                     oldSquare.getColumn(), target.getPiece().getAcronym(), newRow, newColumn);
             moveHistory.add(txt);
@@ -301,15 +313,23 @@ public class Board {
         highlightedCoordinates.clear();
     }
 
-    private void setPieceOnBoard(GridPane boardGrid, int row, int col, Piece piece) {
+    public static void setPieceOnBoard(GridPane boardGrid, int row, int col, Piece piece) {
         squares[row][col] = new Square(row, col, piece);
-        ImageView imageView = new ImageView(new Image("File:pieces/literal/" + piece.getSymbol() + ".png"));
-        imageView.setFitWidth(70);
-        imageView.setFitHeight(65);
+        ImageView imageView = new ImageView();
+        if (piece == null){
+            imageView.setImage(new Image("File:pieces/empty.png"));
+            imageView.setFitWidth(70);
+            imageView.setFitHeight(65);
+        } else{
+            imageView.setImage(new Image("File:pieces/literal/" + piece.getSymbol() + ".png"));
+            imageView.setFitWidth(70);
+            imageView.setFitHeight(65);
+        }
+
         boardGrid.add(imageView, col, row);
     }
 
-    private void setEmptyPieceOnBoard(GridPane boardGrid, int row, int col) {
+    public static void setEmptyPieceOnBoard(GridPane boardGrid, int row, int col) {
         squares[row][col] = new Square(row, col, null);
         ImageView imageView = new ImageView(new Image("File:pieces/empty.png"));
         imageView.setPickOnBounds(true);
@@ -331,6 +351,7 @@ public class Board {
                 if (piece != null && piece.isInverted() != isOpponentsTurn) { // Check opposing pieces
                     if (piece.canMoveTo(piece.getPossibleMoves(row,col,this),kingRow, kingCol)) {
                         return true; // King is in check
+
                     }
                 }
             }
@@ -351,6 +372,10 @@ public class Board {
         return null;
     }
 
+    public boolean isValidMove(int x, int y) {
+        return x >= 0 && x < SIZE && y >= 0 && y < SIZE;
+    }
+
     public boolean isCheckMate() {
         if (!isCheck()) return false; // Not in check, thus not checkmate
 
@@ -359,15 +384,14 @@ public class Board {
 
         int kingRow = kingSquare.getRow();
         int kingCol = kingSquare.getColumn();
-        int[] rowOffsets = {-1, -1, -1, 0, 0, 1, 1, 1};
-        int[] colOffsets = {-1, 0, 1, -1, 1, -1, 0, 1};
 
         // Try all moves the king can make to escape check
-        for (int i = 0; i < rowOffsets.length; i++) {
-            int newRow = kingRow + rowOffsets[i];
-            int newCol = kingCol + colOffsets[i];
-            if (newRow >= 0 && newRow < SIZE && newCol >= 0 && newCol < SIZE) {
-                if (canKingMoveTo(kingSquare, squares[newRow][newCol])) {
+        for (int dx = -1; dx <= 1; dx++) {
+            for (int dy = -1; dy <= 1; dy++) {
+                if (dx == 0 && dy == 0) continue; // Skip if it's not a move
+                int newRow = kingRow + dx;
+                int newCol = kingCol + dy;
+                if (isValidMove(newRow, newCol) && canKingMoveTo(kingSquare, squares[newRow][newCol])) {
                     // Temporarily move the king
                     Piece tempPiece = squares[newRow][newCol].getPiece();
                     squares[newRow][newCol].setPiece(squares[kingRow][kingCol].getPiece());
@@ -377,12 +401,13 @@ public class Board {
                     squares[kingRow][kingCol].setPiece(squares[newRow][newCol].getPiece());
                     squares[newRow][newCol].setPiece(tempPiece);
 
-                    if (!stillInCheck) return false; // King can escape check
+                    if (!stillInCheck) return false; // King can escape checkmate
                 }
             }
         }
-        return true; // No moves can remove the king from check
+        return true; // No moves can remove the king from checkmate
     }
+
 
     private boolean canKingMoveTo(Square from, Square to) {
         // Check if the square is occupied by a friendly piece

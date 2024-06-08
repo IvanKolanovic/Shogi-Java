@@ -4,12 +4,14 @@ import lombok.Getter;
 import lombok.Setter;
 import tvz.ikolanovic.shogi.models.pieces.Piece;
 
+import java.io.Serializable;
+
 /**
  * The type Square.
  */
 @Getter
 @Setter
-public class Square
+public class Square implements Serializable
 {
 
     private int row;

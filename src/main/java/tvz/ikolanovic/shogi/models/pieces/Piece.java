@@ -7,6 +7,7 @@ import lombok.Setter;
 import tvz.ikolanovic.shogi.models.Board;
 import tvz.ikolanovic.shogi.models.Square;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -16,7 +17,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public abstract class Piece {
+public abstract class Piece implements Serializable {
     private String symbol;
     private int owner;
     private boolean promoted;

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Documentation</title>
+</head>
+<body>
+<h1>GO Board Game Documentation</h1>
+<h2>public tvz.ikolanovic.shogi.controllers.BoardController</h2>
+<h3>Fields:</h3>
+<p>private javafx.scene.layout.GridPane boardGrid</p>
+<p>private javafx.scene.control.TextArea statOutput</p>
+<h3>Constructors:</h3>
+<p>public tvz.ikolanovic.shogi.controllers.BoardController()</p>
+<h3>Methods:</h3>
+<p>public void initialize()</p>
+<p>public void mouseCellClicked(javafx.scene.input.MouseEvent arg0)</p>
+<p>public void sendMessage()</p>
+<p>public javafx.scene.control.TextArea getStatOutput()</p>
+<p>public void setStatOutput(javafx.scene.control.TextArea arg0)</p>
+<p>public javafx.scene.layout.GridPane getBoardGrid()</p>
+<p>public void setBoardGrid(javafx.scene.layout.GridPane arg0)</p>
+<p>public void generateHTMLDocumentation()</p>
+<h2>public tvz.ikolanovic.shogi.controllers.GameController</h2>
+<h3>Fields:</h3>
+<p>private javafx.scene.control.TextField usernameField</p>
+<p>private javafx.scene.control.TextArea chatInputField</p>
+<p>private tvz.ikolanovic.shogi.controllers.BoardController boardController</p>
+<h3>Constructors:</h3>
+<p>public tvz.ikolanovic.shogi.controllers.GameController()</p>
+<h3>Methods:</h3>
+<p>public javafx.scene.control.TextField getUsernameField()</p>
+<p>public tvz.ikolanovic.shogi.controllers.BoardController getBoardController()</p>
+<p>public void setChatInputField(javafx.scene.control.TextArea arg0)</p>
+<p>public void setUsernameField(javafx.scene.control.TextField arg0)</p>
+<p>private void onConfirmUsername()</p>
+<p>public void setBoardController(tvz.ikolanovic.shogi.controllers.BoardController arg0)</p>
+<p>public javafx.scene.control.TextArea getChatInputField()</p>
+<h2>public tvz.ikolanovic.shogi.engine.ShogiGameEngine</h2>
+<h3>Fields:</h3>
+<p>private static tvz.ikolanovic.shogi.engine.ShogiGameEngine INSTANCE</p>
+<p>private javafx.stage.Stage stage</p>
+<p>private tvz.ikolanovic.shogi.models.Board gameBoard</p>
+<h3>Constructors:</h3>
+<p>private tvz.ikolanovic.shogi.engine.ShogiGameEngine()</p>
+<h3>Methods:</h3>
+<p>public void setStage(javafx.stage.Stage arg0)</p>
+<p>public static tvz.ikolanovic.shogi.engine.ShogiGameEngine getInstance()</p>
+<p>public javafx.stage.Stage getStage()</p>
+<p>public void setUpBoard()</p>
+<p>public tvz.ikolanovic.shogi.models.Board getGameBoard()</p>
+<p>public void setGameBoard(tvz.ikolanovic.shogi.models.Board arg0)</p>
+<h2>public tvz.ikolanovic.shogi.models.Board</h2>
+<h3>Fields:</h3>
+<p>public static final int SIZE</p>
+<p>private [[Ltvz.ikolanovic.shogi.models.Square; squares</p>
+<p>private java.util.List highlightedCoordinates</p>
+<p>private tvz.ikolanovic.shogi.models.Square selectedSquarePiece</p>
+<p>private java.util.Vector moveHistory</p>
+<p>private java.lang.Boolean isOpponentsTurn</p>
+<h3>Constructors:</h3>
+<p>public tvz.ikolanovic.shogi.models.Board()</p>
+<h3>Methods:</h3>
+<p>public void populateBoard(javafx.scene.layout.GridPane arg0)</p>
+<p>public void gameLogic(javafx.scene.Node arg0, javafx.scene.layout.GridPane arg1, javafx.scene.control.TextArea arg2)</p>
+<p>private static boolean lambda$isSquareHighlighted$3(int arg0, int arg1, tvz.ikolanovic.shogi.models.utils.HighlightedCoordinate arg2)</p>
+<p>public [[Ltvz.ikolanovic.shogi.models.Square; getSquares()</p>
+<p>public void setSquares([[Ltvz.ikolanovic.shogi.models.Square; arg0)</p>
+<p>public boolean isCheck()</p>
+<p>public tvz.ikolanovic.shogi.models.Square getSquare(int arg0, int arg1)</p>
+<p>public boolean isSelectedSquareNonDefault()</p>
+<p>private static boolean lambda$updateBoard$2(int arg0, int arg1, javafx.scene.Node arg2)</p>
+<p>private static boolean lambda$updateBoard$1(int arg0, int arg1, javafx.scene.Node arg2)</p>
+<p>private static boolean lambda$canMovePiece$0(int arg0, int arg1, tvz.ikolanovic.shogi.models.utils.HighlightedCoordinate arg2)</p>
+<p>private void checkAndBuildBackRow(javafx.scene.layout.GridPane arg0, int arg1, int arg2)</p>
+<p>private void checkAndBuildFrontRow(javafx.scene.layout.GridPane arg0, int arg1, int arg2)</p>
+<p>public tvz.ikolanovic.shogi.models.Square getSelectedSquarePiece()</p>
+<p>public void setHighlightedCoordinates(java.util.List arg0)</p>
+<p>private void lambda$clearHighlighting$4(javafx.scene.layout.GridPane arg0, tvz.ikolanovic.shogi.models.utils.HighlightedCoordinate arg1)</p>
+<p>private boolean isSquareHighlighted(int arg0, int arg1)</p>
+<p>public void setSelectedSquarePiece(tvz.ikolanovic.shogi.models.Square arg0)</p>
+<p>private void checkAndBuildMiddleRow(javafx.scene.layout.GridPane arg0, int arg1)</p>
+<p>private void populateAllEmptySquares(javafx.scene.layout.GridPane arg0)</p>
+<p>private void setEmptyPieceOnBoard(javafx.scene.layout.GridPane arg0, int arg1, int arg2)</p>
+<p>private javafx.scene.Node getNodeByRowColumnIndex(int arg0, int arg1, javafx.scene.layout.GridPane arg2)</p>
+<p>public java.util.List getHighlightedCoordinates()</p>
+<p>public boolean isCheckMate()</p>
+<p>public boolean checkIfMyTurn()</p>
+<p>public boolean canMovePiece(int arg0, int arg1)</p>
+<p>public void checkMoveType(javafx.scene.layout.GridPane arg0, tvz.ikolanovic.shogi.models.Square arg1, int arg2, int arg3, javafx.scene.control.TextArea arg4)</p>
+<p>private tvz.ikolanovic.shogi.models.Square findKingSquare()</p>
+<p>public void setMoveHistory(java.util.Vector arg0)</p>
+<p>public void movePieceToSquare(int arg0, int arg1, javafx.scene.layout.GridPane arg2, javafx.scene.control.TextArea arg3)</p>
+<p>public void pieceClicked(int arg0, int arg1, javafx.scene.layout.GridPane arg2)</p>
+<p>public java.util.Vector getMoveHistory()</p>
+<p>private void setPieceOnBoard(javafx.scene.layout.GridPane arg0, int arg1, int arg2, tvz.ikolanovic.shogi.models.pieces.Piece arg3)</p>
+<p>public void setIsOpponentsTurn(java.lang.Boolean arg0)</p>
+<p>private boolean canKingMoveTo(tvz.ikolanovic.shogi.models.Square arg0, tvz.ikolanovic.shogi.models.Square arg1)</p>
+<p>private void clearHighlighting(javafx.scene.layout.GridPane arg0)</p>
+<p>public boolean isValidMove(int arg0, int arg1)</p>
+<p>public java.lang.Boolean getIsOpponentsTurn()</p>
+<p>private void updateBoard(int arg0, int arg1, javafx.scene.layout.GridPane arg2, javafx.scene.control.TextArea arg3)</p>
+<h2>public tvz.ikolanovic.shogi.models.pieces.Bishop</h2>
+<h3>Constructors:</h3>
+<p>public tvz.ikolanovic.shogi.models.pieces.Bishop(int arg0, boolean arg1)</p>
+<h3>Methods:</h3>
+<p>public java.lang.String getAcronym()</p>
+<p>public java.util.List getPossibleMoves(int arg0, int arg1, tvz.ikolanovic.shogi.models.Board arg2)</p>
+<h2>public tvz.ikolanovic.shogi.models.pieces.GoldGeneral</h2>
+<h3>Constructors:</h3>
+<p>public tvz.ikolanovic.shogi.models.pieces.GoldGeneral(int arg0, boolean arg1)</p>
+<h3>Methods:</h3>
+<p>public java.lang.String getAcronym()</p>
+<p>public java.util.List getPossibleMoves(int arg0, int arg1, tvz.ikolanovic.shogi.models.Board arg2)</p>
+<h2>public tvz.ikolanovic.shogi.models.pieces.King</h2>
+<h3>Constructors:</h3>
+<p>public tvz.ikolanovic.shogi.models.pieces.King(int arg0, boolean arg1)</p>
+<h3>Methods:</h3>
+<p>public java.lang.String getAcronym()</p>
+<p>public java.util.List getPossibleMoves(int arg0, int arg1, tvz.ikolanovic.shogi.models.Board arg2)</p>
+<h2>public tvz.ikolanovic.shogi.models.pieces.Knight</h2>
+<h3>Constructors:</h3>
+<p>public tvz.ikolanovic.shogi.models.pieces.Knight(int arg0, boolean arg1)</p>
+<h3>Methods:</h3>
+<p>public java.lang.String getAcronym()</p>
+<p>public java.util.List getPossibleMoves(int arg0, int arg1, tvz.ikolanovic.shogi.models.Board arg2)</p>
+<h2>public tvz.ikolanovic.shogi.models.pieces.Lance</h2>
+<h3>Constructors:</h3>
+<p>public tvz.ikolanovic.shogi.models.pieces.Lance(int arg0, boolean arg1)</p>
+<h3>Methods:</h3>
+<p>public java.lang.String getAcronym()</p>
+<p>public java.util.List getPossibleMoves(int arg0, int arg1, tvz.ikolanovic.shogi.models.Board arg2)</p>
+<h2>public tvz.ikolanovic.shogi.models.pieces.Pawn</h2>
+<h3>Constructors:</h3>
+<p>public tvz.ikolanovic.shogi.models.pieces.Pawn(int arg0, boolean arg1)</p>
+<h3>Methods:</h3>
+<p>public java.lang.String getAcronym()</p>
+<p>public java.util.List getPossibleMoves(int arg0, int arg1, tvz.ikolanovic.shogi.models.Board arg2)</p>
+<h2>public abstract tvz.ikolanovic.shogi.models.pieces.Piece</h2>
+<h3>Fields:</h3>
+<p>private java.lang.String symbol</p>
+<p>private int owner</p>
+<p>private boolean promoted</p>
+<p>private boolean inverted</p>
+<h3>Constructors:</h3>
+<p>public tvz.ikolanovic.shogi.models.pieces.Piece(java.lang.String arg0, int arg1, boolean arg2, boolean arg3)</p>
+<p>public tvz.ikolanovic.shogi.models.pieces.Piece()</p>
+<h3>Methods:</h3>
+<p>public int getOwner()</p>
+<p>public void setOwner(int arg0)</p>
+<p>public java.lang.String getSymbol()</p>
+<p>public void demote()</p>
+<p>public boolean canMoveTo(java.util.List arg0, int arg1, int arg2)</p>
+<p>public void setSymbol(java.lang.String arg0)</p>
+<p>public boolean isPromoted()</p>
+<p>public java.lang.String getAcronym()</p>
+<p>public boolean isInverted()</p>
+<p>public void promote()</p>
+<p>public java.util.List getPossibleMoves(int arg0, int arg1, tvz.ikolanovic.shogi.models.Board arg2)</p>
+<p>public void setPromoted(boolean arg0)</p>
+<p>public void setInverted(boolean arg0)</p>
+<p>private static boolean lambda$canMoveTo$0(int arg0, int arg1, tvz.ikolanovic.shogi.models.Square arg2)</p>
+<h2>public tvz.ikolanovic.shogi.models.pieces.Rook</h2>
+<h3>Constructors:</h3>
+<p>public tvz.ikolanovic.shogi.models.pieces.Rook(int arg0, boolean arg1)</p>
+<h3>Methods:</h3>
+<p>public java.lang.String getAcronym()</p>
+<p>public java.util.List getPossibleMoves(int arg0, int arg1, tvz.ikolanovic.shogi.models.Board arg2)</p>
+<h2>public tvz.ikolanovic.shogi.models.pieces.SilverGeneral</h2>
+<h3>Constructors:</h3>
+<p>public tvz.ikolanovic.shogi.models.pieces.SilverGeneral(int arg0, boolean arg1)</p>
+<h3>Methods:</h3>
+<p>public java.lang.String getAcronym()</p>
+<p>public java.util.List getPossibleMoves(int arg0, int arg1, tvz.ikolanovic.shogi.models.Board arg2)</p>
+<h2>public tvz.ikolanovic.shogi.models.Square</h2>
+<h3>Fields:</h3>
+<p>private int row</p>
+<p>private int column</p>
+<p>private tvz.ikolanovic.shogi.models.pieces.Piece piece</p>
+<h3>Constructors:</h3>
+<p>public tvz.ikolanovic.shogi.models.Square(int arg0, int arg1, tvz.ikolanovic.shogi.models.pieces.Piece arg2)</p>
+<h3>Methods:</h3>
+<p>public int getRow()</p>
+<p>public void setRow(int arg0)</p>
+<p>public void setColumn(int arg0)</p>
+<p>public tvz.ikolanovic.shogi.models.pieces.Piece getPiece()</p>
+<p>public void setPiece(tvz.ikolanovic.shogi.models.pieces.Piece arg0)</p>
+<p>public int getColumn()</p>
+<h2>public tvz.ikolanovic.shogi.models.utils.DialogUtils</h2>
+<h3>Constructors:</h3>
+<p>public tvz.ikolanovic.shogi.models.utils.DialogUtils()</p>
+<h3>Methods:</h3>
+<p>public static void showSuccessDialog(java.lang.String arg0)</p>
+<p>public static void showWinningDialog(java.lang.String arg0)</p>
+<h2>public tvz.ikolanovic.shogi.models.utils.DocumentationUtils</h2>
+<h3>Constructors:</h3>
+<p>public tvz.ikolanovic.shogi.models.utils.DocumentationUtils()</p>
+<h3>Methods:</h3>
+<p>public static void generateDocumentation()</p>
+<p>private static boolean lambda$generateDocumentation$0(java.nio.file.Path arg0)</p>
+<p>private static boolean lambda$generateDocumentation$1(java.nio.file.Path arg0)</p>
+<h2>public final tvz.ikolanovic.shogi.models.utils.HighlightedCoordinate</h2>
+<h3>Fields:</h3>
+<p>private final int row</p>
+<p>private final int column</p>
+<h3>Constructors:</h3>
+<p>public tvz.ikolanovic.shogi.models.utils.HighlightedCoordinate(int row, int column)</p>
+<h3>Methods:</h3>
+<p>public int column()</p>
+<p>public final boolean equals(java.lang.Object arg0)</p>
+<p>public final java.lang.String toString()</p>
+<p>public final int hashCode()</p>
+<p>public int row()</p>
+<h2>public final tvz.ikolanovic.shogi.models.utils.MoveType</h2>
+<h3>Fields:</h3>
+<p>public static final tvz.ikolanovic.shogi.models.utils.MoveType REGULAR</p>
+<p>public static final tvz.ikolanovic.shogi.models.utils.MoveType CAPTURE</p>
+<p>public static final tvz.ikolanovic.shogi.models.utils.MoveType PROMOTION</p>
+<p>public static final tvz.ikolanovic.shogi.models.utils.MoveType DROP</p>
+<p>private static final [Ltvz.ikolanovic.shogi.models.utils.MoveType; $VALUES</p>
+<h3>Constructors:</h3>
+<p>private tvz.ikolanovic.shogi.models.utils.MoveType(java.lang.String arg0, int arg1)</p>
+<h3>Methods:</h3>
+<p>public static [Ltvz.ikolanovic.shogi.models.utils.MoveType; values()</p>
+<p>public static tvz.ikolanovic.shogi.models.utils.MoveType valueOf(java.lang.String arg0)</p>
+<p>private static [Ltvz.ikolanovic.shogi.models.utils.MoveType; $values()</p>
+<h2>public tvz.ikolanovic.shogi.ShogiBoardGame</h2>
+<h3>Constructors:</h3>
+<p>public tvz.ikolanovic.shogi.ShogiBoardGame()</p>
+<h3>Methods:</h3>
+<p>public static void main([Ljava.lang.String; arg0)</p>
+<p>public void initialize(javafx.stage.Stage arg0)</p>
+<p>public void start(javafx.stage.Stage arg0)</p>
+</body>
+</html>

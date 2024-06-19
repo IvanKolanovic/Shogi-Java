@@ -9,10 +9,7 @@ import javafx.scene.layout.GridPane;
 import lombok.Getter;
 import lombok.Setter;
 import tvz.ikolanovic.shogi.engine.ShogiGameEngine;
-import tvz.ikolanovic.shogi.models.Board;
-import tvz.ikolanovic.shogi.models.GameData;
-import tvz.ikolanovic.shogi.models.PlayerOutPieces;
-import tvz.ikolanovic.shogi.models.Square;
+import tvz.ikolanovic.shogi.models.*;
 import tvz.ikolanovic.shogi.models.utils.DialogUtils;
 import tvz.ikolanovic.shogi.models.utils.DocumentationUtils;
 
@@ -60,8 +57,9 @@ public class BoardController {
     }
 
     public void saveGame() {
+        Board.stopTimers();
         GameData gameData = new GameData(Board.squares, ShogiGameEngine.getInstance().getGameBoard().getMoveHistory(), Board.isOpponentsTurn,
-                ShogiGameEngine.getInstance().getGameBoard().getPlayerOutPieces());
+                ShogiGameEngine.getInstance().getGameBoard().getPlayerOutPieces(), Board.player1Timer.getTimeLeft(), Board.player2Timer.getTimeLeft());
 
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("saveGame/gameSave.dat"))) {
             oos.writeObject(gameData);
@@ -90,7 +88,7 @@ public class BoardController {
             gameData.getMoveHistory().forEach(move -> statOutput.appendText(move));
             ShogiGameEngine.getInstance().getGameBoard().setMoveHistory(gameData.getMoveHistory());
             Board.isOpponentsTurn = gameData.getIsOpponentsTurn();
-
+            Board.gameStarted = true;
             PlayerOutPieces playerOutPieces = gameData.getPlayerOutPieces();
 
             playerOutPieces.getPlayer1().forEach((key, value) -> {
@@ -101,6 +99,11 @@ public class BoardController {
                 Label label = (Label) ShogiGameEngine.getInstance().getStage().getScene().lookup(key);
                 label.setText(value);
             });
+
+            Board.player1Timer = new PlayerTimer(gameData.getPlayer1Timer(), p1Timer,"Player 1 Timer");
+            Board.player2Timer = new PlayerTimer(gameData.getPlayer2Timer(), p2Timer,"Player 2 Timer");
+            Board.startTimer();
+            Board.switchTurn();
 
             DialogUtils.showSuccessDialog("Game was successfully loaded!");
         } catch (IOException | ClassNotFoundException ex) {

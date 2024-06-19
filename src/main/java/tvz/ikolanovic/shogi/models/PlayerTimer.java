@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 import tvz.ikolanovic.shogi.models.utils.DialogUtils;
 
+import java.io.Serializable;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
@@ -15,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 @Getter
 @Setter
 @AllArgsConstructor
-public class PlayerTimer {
+public class PlayerTimer implements Serializable {
     private final int totalTime;
     private int timeLeft;
     private boolean running;

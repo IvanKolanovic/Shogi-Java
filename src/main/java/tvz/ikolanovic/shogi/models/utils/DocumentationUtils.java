@@ -1,9 +1,6 @@
 package tvz.ikolanovic.shogi.models.utils;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.lang.reflect.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -11,7 +8,7 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class DocumentationUtils {
+public class DocumentationUtils implements Serializable {
 
     public static final String ABSOLUTE_PATH = System.getProperty("user.dir");
     public static final String DOC_PATH = "documentation/doc.html";

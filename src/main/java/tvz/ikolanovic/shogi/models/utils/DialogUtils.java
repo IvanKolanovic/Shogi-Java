@@ -2,7 +2,9 @@ package tvz.ikolanovic.shogi.models.utils;
 
 import javafx.scene.control.Alert;
 
-public class DialogUtils {
+import java.io.Serializable;
+
+public class DialogUtils implements Serializable {
 
     public static void showWinningDialog (String player){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);

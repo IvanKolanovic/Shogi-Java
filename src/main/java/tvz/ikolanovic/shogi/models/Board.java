@@ -18,6 +18,7 @@ import tvz.ikolanovic.shogi.models.pieces.*;
 import tvz.ikolanovic.shogi.models.utils.DialogUtils;
 import tvz.ikolanovic.shogi.models.utils.HighlightedCoordinate;
 
+import java.io.Serializable;
 import java.util.*;
 
 /**
@@ -25,7 +26,7 @@ import java.util.*;
  */
 @Getter
 @Setter
-public class Board {
+public class Board implements Serializable {
     /**
      * The constant SIZE.
      */
@@ -34,8 +35,8 @@ public class Board {
     private List<HighlightedCoordinate> highlightedCoordinates;
     private Square selectedSquarePiece;
     private List<String> moveHistory = new ArrayList<>();
-    private PlayerTimer player1Timer;
-    private PlayerTimer player2Timer;
+    public static PlayerTimer player1Timer;
+    public static PlayerTimer player2Timer;
     public static Boolean gameStarted;
     public static Boolean isOpponentsTurn;
     private boolean outOfTime = false;
@@ -70,9 +71,9 @@ public class Board {
             }
 
             gameStarted = true;
-            this.player1Timer = new PlayerTimer(10, p1Timer,"Player 1 Timer");
-            this.player2Timer = new PlayerTimer(300, p2Timer,"Player 2 Timer");
-            this.startTimer();
+            player1Timer = new PlayerTimer(300, p1Timer, "Player 1 Timer");
+            player2Timer = new PlayerTimer(300, p2Timer, "Player 2 Timer");
+            startTimer();
         }
 
         // click on descendant node
@@ -161,7 +162,6 @@ public class Board {
      * @return the boolean
      */
     public boolean canMovePiece(int row, int col) {
-        Square square = squares[row][col];
         boolean isOnHighlighted = this.highlightedCoordinates.stream().anyMatch(highlightedCoordinate ->
                 highlightedCoordinate.row() == row && highlightedCoordinate.column() == col);
 
@@ -179,11 +179,6 @@ public class Board {
      */
     public Square getSquare(int row, int column) {
         return squares[row][column];
-    }
-
-    public boolean isSelectedSquareNonDefault() {
-        return selectedSquarePiece.getRow() != -1
-                && selectedSquarePiece.getColumn() != -1;
     }
 
     public static void populateAllEmptySquares(GridPane boardGrid) {
@@ -265,7 +260,7 @@ public class Board {
                 && GridPane.getRowIndex(node) == oldRow);
         setEmptyPieceOnBoard(boardGrid, oldRow, oldColumn);
         // write stat
-        this.checkMoveType(boardGrid, oldSquare, newRow, newColumn, statOutput);
+        this.checkMoveType(oldSquare, newRow, newColumn, statOutput);
 
         if (squares[newRow][newColumn].getPiece() == null) {
             // place empty on ol
@@ -280,22 +275,19 @@ public class Board {
         boardGrid.add(imageView, newColumn, newRow);
         setPieceOnBoard(boardGrid, newRow, newColumn, oldSquare.getPiece());
         isOpponentsTurn = !isOpponentsTurn;
-        this.switchTurn();
+        switchTurn();
     }
 
     /**
      * Check move type.
      *
-     * @param boardGrid  the board grid
      * @param oldSquare  the old square
      * @param newRow     the new row
      * @param newColumn  the new column
      * @param statOutput the stat output
      */
-    public void checkMoveType(GridPane boardGrid, Square oldSquare, final int newRow,
+    public void checkMoveType(Square oldSquare, final int newRow,
                               final int newColumn, TextArea statOutput) {
-        ImageView imageView = (ImageView) this.getNodeByRowColumnIndex(oldSquare.getRow(),
-                oldSquare.getColumn(), boardGrid);
         Square target = squares[newRow][newColumn];
         if (target.getPiece() == null) {
             String txt = String.format("%s%d%d-%d%d%n", oldSquare.getPiece().getAcronym(), oldSquare.getRow(),
@@ -347,13 +339,11 @@ public class Board {
         ImageView imageView = new ImageView();
         if (piece == null) {
             imageView.setImage(new Image("File:pieces/empty.png"));
-            imageView.setFitWidth(70);
-            imageView.setFitHeight(65);
         } else {
             imageView.setImage(new Image("File:pieces/literal/" + piece.getSymbol() + ".png"));
-            imageView.setFitWidth(70);
-            imageView.setFitHeight(65);
         }
+        imageView.setFitWidth(70);
+        imageView.setFitHeight(65);
 
         boardGrid.add(imageView, col, row);
     }
@@ -474,14 +464,14 @@ public class Board {
         return new PlayerOutPieces(player1, player2);
     }
 
-    public void startTimer() {
+    public static void startTimer() {
         player1Timer.start();
         player2Timer.start();
         player2Timer.pause();
         player1Timer.resume(); // Start with player 1
     }
 
-    public void switchTurn() {
+    public static void switchTurn() {
         if (isOpponentsTurn) {
             player1Timer.pause();
             player2Timer.resume();
@@ -491,15 +481,7 @@ public class Board {
         }
     }
 
-    public int getPlayer1TimeLeft() {
-        return player1Timer.getTimeLeft();
-    }
-
-    public int getPlayer2TimeLeft() {
-        return player2Timer.getTimeLeft();
-    }
-
-    public void stopTimers() {
+    public static void stopTimers() {
         player1Timer.stop();
         player2Timer.stop();
     }

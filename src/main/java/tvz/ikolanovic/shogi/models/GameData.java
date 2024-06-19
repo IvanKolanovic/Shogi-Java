@@ -21,4 +21,6 @@ public class GameData implements Serializable {
     private List<String> moveHistory = new ArrayList<>();
     private Boolean isOpponentsTurn;
     private PlayerOutPieces playerOutPieces;
+    private int player1Timer;
+    private int player2Timer;
 }

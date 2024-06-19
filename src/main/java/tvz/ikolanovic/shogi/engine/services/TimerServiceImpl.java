@@ -17,8 +17,6 @@ public class TimerServiceImpl implements TimerService {
     private PlayerTimer player2Timer;
 
 
-
-
     @Override
     public void startTimer() {
         player1Timer.start();

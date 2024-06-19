@@ -19,12 +19,12 @@ import java.util.concurrent.TimeUnit;
 @AllArgsConstructor
 public class PlayerTimer implements Serializable {
     private final int totalTime;
-    private int timeLeft;
-    private boolean running;
     private final Object lock = new Object();
     private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-    private ScheduledFuture<?> countdownTask;
     private final Label timerLabel;
+    private int timeLeft;
+    private boolean running;
+    private ScheduledFuture<?> countdownTask;
     private String threadName;
 
     public PlayerTimer(int totalTimeInSeconds, Label timerLabel, String threadName) {

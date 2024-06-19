@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Documentation</title>
+    <title>Documentation</title>
 </head>
 <body>
 <h1>GO Board Game Documentation</h1>
@@ -49,13 +49,15 @@
 <p>public static tvz.ikolanovic.shogi.engine.GameEngine getInstance()</p>
 <p>public void setStage(javafx.stage.Stage arg0)</p>
 <p>public javafx.stage.Stage getStage()</p>
-<p>public void gameLogic(javafx.scene.Node arg0, javafx.scene.layout.GridPane arg1, javafx.scene.control.TextArea arg2, javafx.scene.control.Label arg3, javafx.scene.control.Label arg4)</p>
+<p>public void gameLogic(javafx.scene.Node arg0, javafx.scene.layout.GridPane arg1, javafx.scene.control.TextArea arg2,
+    javafx.scene.control.Label arg3, javafx.scene.control.Label arg4)</p>
 <p>public tvz.ikolanovic.shogi.engine.services.interfaces.SaveAndLoadService getSaveAndLoadService()</p>
 <p>public tvz.ikolanovic.shogi.engine.services.interfaces.BoardManager getBoardManager()</p>
 <p>public tvz.ikolanovic.shogi.models.Square getSelectedSquarePiece()</p>
 <p>public void setHighlightedCoordinates(java.util.List arg0)</p>
 <p>public void setSaveAndLoadService(tvz.ikolanovic.shogi.engine.services.interfaces.SaveAndLoadService arg0)</p>
-<p>private static boolean lambda$canMovePiece$0(int arg0, int arg1, tvz.ikolanovic.shogi.models.utils.HighlightedCoordinate arg2)</p>
+<p>private static boolean lambda$canMovePiece$0(int arg0, int arg1,
+    tvz.ikolanovic.shogi.models.utils.HighlightedCoordinate arg2)</p>
 <p>public void setSelectedSquarePiece(tvz.ikolanovic.shogi.models.Square arg0)</p>
 <p>public java.util.List getHighlightedCoordinates()</p>
 <p>public java.lang.Boolean getGameStarted()</p>
@@ -69,7 +71,8 @@
 <p>public boolean canMovePiece(int arg0, int arg1)</p>
 <p>public java.util.List getMoveHistory()</p>
 <p>public boolean checkIfMyTurn()</p>
-<p>public void movePieceToSquare(int arg0, int arg1, javafx.scene.layout.GridPane arg2, javafx.scene.control.TextArea arg3)</p>
+<p>public void movePieceToSquare(int arg0, int arg1, javafx.scene.layout.GridPane arg2, javafx.scene.control.TextArea
+    arg3)</p>
 <p>public void pieceClicked(int arg0, int arg1, javafx.scene.layout.GridPane arg2)</p>
 <p>public void setTimerService(tvz.ikolanovic.shogi.engine.services.interfaces.TimerService arg0)</p>
 <p>public [[Ltvz.ikolanovic.shogi.models.Square; getSquares()</p>
@@ -86,16 +89,21 @@
 <p>public void checkAndBuildMiddleRow(javafx.scene.layout.GridPane arg0, int arg1)</p>
 <p>public void checkAndBuildFrontRow(javafx.scene.layout.GridPane arg0, int arg1, int arg2)</p>
 <p>public void setEmptyPieceOnBoard(javafx.scene.layout.GridPane arg0, int arg1, int arg2)</p>
-<p>private void lambda$clearHighlighting$0(javafx.scene.layout.GridPane arg0, tvz.ikolanovic.shogi.models.utils.HighlightedCoordinate arg1)</p>
+<p>private void lambda$clearHighlighting$0(javafx.scene.layout.GridPane arg0,
+    tvz.ikolanovic.shogi.models.utils.HighlightedCoordinate arg1)</p>
 <p>public void populateAllEmptySquares(javafx.scene.layout.GridPane arg0)</p>
 <p>private static boolean lambda$updateBoard$3(int arg0, int arg1, javafx.scene.Node arg2)</p>
 <p>public void checkAndBuildBackRow(javafx.scene.layout.GridPane arg0, int arg1, int arg2)</p>
 <p>private static boolean lambda$updateBoard$2(int arg0, int arg1, javafx.scene.Node arg2)</p>
 <p>public void clearHighlighting(javafx.scene.layout.GridPane arg0)</p>
-<p>public void updateBoard(int arg0, int arg1, javafx.scene.layout.GridPane arg2, javafx.scene.control.TextArea arg3)</p>
-<p>public void setPieceOnBoard(javafx.scene.layout.GridPane arg0, int arg1, int arg2, tvz.ikolanovic.shogi.models.pieces.Piece arg3)</p>
-<p>private void checkMoveType(tvz.ikolanovic.shogi.models.Square arg0, int arg1, int arg2, javafx.scene.control.TextArea arg3)</p>
-<p>private static boolean lambda$isSquareHighlighted$1(int arg0, int arg1, tvz.ikolanovic.shogi.models.utils.HighlightedCoordinate arg2)</p>
+<p>public void updateBoard(int arg0, int arg1, javafx.scene.layout.GridPane arg2, javafx.scene.control.TextArea
+    arg3)</p>
+<p>public void setPieceOnBoard(javafx.scene.layout.GridPane arg0, int arg1, int arg2,
+    tvz.ikolanovic.shogi.models.pieces.Piece arg3)</p>
+<p>private void checkMoveType(tvz.ikolanovic.shogi.models.Square arg0, int arg1, int arg2, javafx.scene.control.TextArea
+    arg3)</p>
+<p>private static boolean lambda$isSquareHighlighted$1(int arg0, int arg1,
+    tvz.ikolanovic.shogi.models.utils.HighlightedCoordinate arg2)</p>
 <h2>public abstract interface tvz.ikolanovic.shogi.engine.services.interfaces.BoardManager</h2>
 <h3>Methods:</h3>
 <p>public abstract void populateBoard(javafx.scene.layout.GridPane arg0)</p>
@@ -107,13 +115,16 @@
 <p>public abstract void populateAllEmptySquares(javafx.scene.layout.GridPane arg0)</p>
 <p>public abstract void checkAndBuildBackRow(javafx.scene.layout.GridPane arg0, int arg1, int arg2)</p>
 <p>public abstract void clearHighlighting(javafx.scene.layout.GridPane arg0)</p>
-<p>public abstract void updateBoard(int arg0, int arg1, javafx.scene.layout.GridPane arg2, javafx.scene.control.TextArea arg3)</p>
-<p>public abstract void setPieceOnBoard(javafx.scene.layout.GridPane arg0, int arg1, int arg2, tvz.ikolanovic.shogi.models.pieces.Piece arg3)</p>
+<p>public abstract void updateBoard(int arg0, int arg1, javafx.scene.layout.GridPane arg2, javafx.scene.control.TextArea
+    arg3)</p>
+<p>public abstract void setPieceOnBoard(javafx.scene.layout.GridPane arg0, int arg1, int arg2,
+    tvz.ikolanovic.shogi.models.pieces.Piece arg3)</p>
 <h2>public abstract interface tvz.ikolanovic.shogi.engine.services.interfaces.SaveAndLoadService</h2>
 <h3>Fields:</h3>
 <p>public static final java.util.List pieceAcronyms</p>
 <h3>Methods:</h3>
-<p>public abstract void loadGame(javafx.scene.layout.GridPane arg0, javafx.scene.control.TextArea arg1, javafx.scene.control.Label arg2, javafx.scene.control.Label arg3)</p>
+<p>public abstract void loadGame(javafx.scene.layout.GridPane arg0, javafx.scene.control.TextArea arg1,
+    javafx.scene.control.Label arg2, javafx.scene.control.Label arg3)</p>
 <p>public abstract void saveGame()</p>
 <p>public abstract tvz.ikolanovic.shogi.models.PlayerOutPieces getPlayerOutPieces()</p>
 <h2>public abstract interface tvz.ikolanovic.shogi.engine.services.interfaces.TimerService</h2>
@@ -129,7 +140,8 @@
 <h3>Constructors:</h3>
 <p>public tvz.ikolanovic.shogi.engine.services.SaveAndLoadServiceImpl()</p>
 <h3>Methods:</h3>
-<p>public void loadGame(javafx.scene.layout.GridPane arg0, javafx.scene.control.TextArea arg1, javafx.scene.control.Label arg2, javafx.scene.control.Label arg3)</p>
+<p>public void loadGame(javafx.scene.layout.GridPane arg0, javafx.scene.control.TextArea arg1,
+    javafx.scene.control.Label arg2, javafx.scene.control.Label arg3)</p>
 <p>public void saveGame()</p>
 <p>private static void lambda$loadGame$1(java.lang.String arg0, java.lang.String arg1)</p>
 <p>private static void lambda$loadGame$0(java.lang.String arg0, java.lang.String arg1)</p>
@@ -140,7 +152,8 @@
 <p>private tvz.ikolanovic.shogi.models.PlayerTimer player2Timer</p>
 <h3>Constructors:</h3>
 <p>public tvz.ikolanovic.shogi.engine.services.TimerServiceImpl()</p>
-<p>public tvz.ikolanovic.shogi.engine.services.TimerServiceImpl(tvz.ikolanovic.shogi.models.PlayerTimer arg0, tvz.ikolanovic.shogi.models.PlayerTimer arg1)</p>
+<p>public tvz.ikolanovic.shogi.engine.services.TimerServiceImpl(tvz.ikolanovic.shogi.models.PlayerTimer arg0,
+    tvz.ikolanovic.shogi.models.PlayerTimer arg1)</p>
 <h3>Methods:</h3>
 <p>public void setPlayer2Timer(tvz.ikolanovic.shogi.models.PlayerTimer arg0)</p>
 <p>public tvz.ikolanovic.shogi.models.PlayerTimer getPlayer1Timer()</p>
@@ -160,7 +173,8 @@
 <p>private int player2Timer</p>
 <h3>Constructors:</h3>
 <p>public tvz.ikolanovic.shogi.models.GameData()</p>
-<p>public tvz.ikolanovic.shogi.models.GameData([[Ltvz.ikolanovic.shogi.models.Square; arg0, java.util.List arg1, java.lang.Boolean arg2, tvz.ikolanovic.shogi.models.PlayerOutPieces arg3, int arg4, int arg5)</p>
+<p>public tvz.ikolanovic.shogi.models.GameData([[Ltvz.ikolanovic.shogi.models.Square; arg0, java.util.List arg1,
+    java.lang.Boolean arg2, tvz.ikolanovic.shogi.models.PlayerOutPieces arg3, int arg4, int arg5)</p>
 <h3>Methods:</h3>
 <p>public void setPlayer2Timer(int arg0)</p>
 <p>public int getPlayer1Timer()</p>
@@ -271,7 +285,8 @@
 <p>private java.lang.String threadName</p>
 <h3>Constructors:</h3>
 <p>public tvz.ikolanovic.shogi.models.PlayerTimer(int arg0, javafx.scene.control.Label arg1, java.lang.String arg2)</p>
-<p>public tvz.ikolanovic.shogi.models.PlayerTimer(int arg0, int arg1, boolean arg2, java.util.concurrent.ScheduledFuture arg3, javafx.scene.control.Label arg4, java.lang.String arg5)</p>
+<p>public tvz.ikolanovic.shogi.models.PlayerTimer(int arg0, int arg1, boolean arg2, java.util.concurrent.ScheduledFuture
+    arg3, javafx.scene.control.Label arg4, java.lang.String arg5)</p>
 <h3>Methods:</h3>
 <p>public void reset()</p>
 <p>public void start()</p>

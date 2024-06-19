@@ -41,6 +41,7 @@ public class Pawn extends Piece {
 
         return squares;
     }
+
     public String getAcronym() {
         return "P";
     }

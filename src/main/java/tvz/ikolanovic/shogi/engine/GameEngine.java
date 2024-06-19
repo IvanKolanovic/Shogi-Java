@@ -31,9 +31,9 @@ import java.util.List;
 @Getter
 @Setter
 public class GameEngine implements Serializable {
+    public static final int SIZE = 9;
     private static GameEngine INSTANCE;
     private Stage stage;
-    public static final int SIZE = 9;
     private Square[][] squares;
     private List<HighlightedCoordinate> highlightedCoordinates;
     private Square selectedSquarePiece;

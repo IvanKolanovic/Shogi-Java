@@ -51,6 +51,7 @@ public class Lance extends Piece {
 
         return squares;
     }
+
     public String getAcronym() {
         return "L";
     }

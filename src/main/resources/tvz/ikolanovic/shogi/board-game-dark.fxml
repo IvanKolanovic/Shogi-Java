@@ -32,183 +32,233 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-
-<VBox prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tvz.ikolanovic.shogi.controllers.BoardController">
-  <children>
-    <MenuBar VBox.vgrow="NEVER">
-      <menus>
-        <Menu mnemonicParsing="false" text="File">
-          <items>
-            <MenuItem mnemonicParsing="false" onAction="#restartGame" text="New" />
-            <MenuItem mnemonicParsing="false" onAction="#saveGame" text="Save" />
-                  <MenuItem mnemonicParsing="false" onAction="#loadGame" text="Load" />
-            <MenuItem mnemonicParsing="false" text="Quit" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Generate">
-          <items>
-            <MenuItem mnemonicParsing="false" onAction="#generateHTMLDocumentation" text="Documentation" />
-          </items>
-        </Menu>
-      </menus>
-    </MenuBar>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
-         <children>
-            <SplitPane dividerPositions="0.6838541666666667" layoutY="-1.0" prefHeight="1055.0" prefWidth="1920.0">
-              <items>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-                     <children>
-                        <Label layoutX="31.0" layoutY="14.0" prefHeight="17.0" prefWidth="53.0" text="Board" />
-                        <AnchorPane layoutX="260.0" layoutY="132.0" prefHeight="792.0" prefWidth="792.0">
-                           <children>
-                              <ImageView fitHeight="792.0" fitWidth="792.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../../images/board.png" />
-                                 </image>
-                              </ImageView>
-                              <GridPane fx:id="boardGrid" gridLinesVisible="true" layoutX="71.0" layoutY="71.0" onMouseClicked="#mouseCellClicked" prefHeight="650.0" prefWidth="651.0">
-                                <columnConstraints>
-                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="10.0" prefWidth="73.0" />
-                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="71.0" minWidth="0.0" prefWidth="71.0" />
-                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="10.0" prefWidth="72.0" />
-                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="10.0" prefWidth="73.0" />
-                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="118.0" minWidth="10.0" prefWidth="72.0" />
-                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="10.0" prefWidth="71.0" />
-                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="10.0" prefWidth="72.0" />
-                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="10.0" prefWidth="72.0" />
-                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="10.0" prefWidth="74.0" />
-                                </columnConstraints>
-                                <rowConstraints>
-                                  <RowConstraints maxHeight="89.0" minHeight="10.0" prefHeight="73.0" vgrow="SOMETIMES" />
-                                  <RowConstraints maxHeight="89.0" minHeight="10.0" prefHeight="72.0" vgrow="NEVER" />
-                                  <RowConstraints maxHeight="89.0" minHeight="0.0" prefHeight="72.0" vgrow="NEVER" />
-                                    <RowConstraints maxHeight="89.0" minHeight="0.0" prefHeight="71.0" vgrow="NEVER" />
-                                    <RowConstraints maxHeight="89.0" minHeight="0.0" prefHeight="72.0" vgrow="NEVER" />
-                                    <RowConstraints maxHeight="89.0" minHeight="0.0" prefHeight="71.0" vgrow="NEVER" />
-                                    <RowConstraints maxHeight="89.0" minHeight="4.0" prefHeight="72.0" vgrow="NEVER" />
-                                    <RowConstraints maxHeight="89.0" minHeight="10.0" prefHeight="73.0" vgrow="NEVER" />
-                                    <RowConstraints maxHeight="89.0" minHeight="0.0" prefHeight="74.0" vgrow="NEVER" />
-                                </rowConstraints>
-                              </GridPane>
-                           </children>
+<VBox xmlns:fx="http://javafx.com/fxml/1" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/21"
+      fx:controller="tvz.ikolanovic.shogi.controllers.BoardController">
+    <children>
+        <MenuBar VBox.vgrow="NEVER">
+            <menus>
+                <Menu mnemonicParsing="false" text="File">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#restartGame" text="New"/>
+                        <MenuItem mnemonicParsing="false" onAction="#saveGame" text="Save"/>
+                        <MenuItem mnemonicParsing="false" onAction="#loadGame" text="Load"/>
+                        <MenuItem mnemonicParsing="false" text="Quit"/>
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Generate">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#generateHTMLDocumentation" text="Documentation"/>
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+            <children>
+                <SplitPane dividerPositions="0.6838541666666667" layoutY="-1.0" prefHeight="1055.0" prefWidth="1920.0">
+                    <items>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                            <children>
+                                <Label layoutX="31.0" layoutY="14.0" prefHeight="17.0" prefWidth="53.0" text="Board"/>
+                                <AnchorPane layoutX="260.0" layoutY="132.0" prefHeight="792.0" prefWidth="792.0">
+                                    <children>
+                                        <ImageView fitHeight="792.0" fitWidth="792.0" pickOnBounds="true"
+                                                   preserveRatio="true">
+                                            <image>
+                                                <Image url="@../../../images/board.png"/>
+                                            </image>
+                                        </ImageView>
+                                        <GridPane fx:id="boardGrid" gridLinesVisible="true" layoutX="71.0"
+                                                  layoutY="71.0" onMouseClicked="#mouseCellClicked" prefHeight="650.0"
+                                                  prefWidth="651.0">
+                                            <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="10.0"
+                                                                   prefWidth="73.0"/>
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="71.0" minWidth="0.0"
+                                                                   prefWidth="71.0"/>
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="10.0"
+                                                                   prefWidth="72.0"/>
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="10.0"
+                                                                   prefWidth="73.0"/>
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="118.0" minWidth="10.0"
+                                                                   prefWidth="72.0"/>
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="10.0"
+                                                                   prefWidth="71.0"/>
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="10.0"
+                                                                   prefWidth="72.0"/>
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="10.0"
+                                                                   prefWidth="72.0"/>
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="10.0"
+                                                                   prefWidth="74.0"/>
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                                <RowConstraints maxHeight="89.0" minHeight="10.0" prefHeight="73.0"
+                                                                vgrow="SOMETIMES"/>
+                                                <RowConstraints maxHeight="89.0" minHeight="10.0" prefHeight="72.0"
+                                                                vgrow="NEVER"/>
+                                                <RowConstraints maxHeight="89.0" minHeight="0.0" prefHeight="72.0"
+                                                                vgrow="NEVER"/>
+                                                <RowConstraints maxHeight="89.0" minHeight="0.0" prefHeight="71.0"
+                                                                vgrow="NEVER"/>
+                                                <RowConstraints maxHeight="89.0" minHeight="0.0" prefHeight="72.0"
+                                                                vgrow="NEVER"/>
+                                                <RowConstraints maxHeight="89.0" minHeight="0.0" prefHeight="71.0"
+                                                                vgrow="NEVER"/>
+                                                <RowConstraints maxHeight="89.0" minHeight="4.0" prefHeight="72.0"
+                                                                vgrow="NEVER"/>
+                                                <RowConstraints maxHeight="89.0" minHeight="10.0" prefHeight="73.0"
+                                                                vgrow="NEVER"/>
+                                                <RowConstraints maxHeight="89.0" minHeight="0.0" prefHeight="74.0"
+                                                                vgrow="NEVER"/>
+                                            </rowConstraints>
+                                        </GridPane>
+                                    </children>
+                                </AnchorPane>
+                            </children>
                         </AnchorPane>
-                     </children>
-                  </AnchorPane>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-                     <children>
-                        <SplitPane dividerPositions="0.43387250237868696" orientation="VERTICAL" prefHeight="1053.0" prefWidth="605.0">
-                          <items>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="511.0" prefWidth="603.0">
-                                 <children>
-                                    <Label layoutX="14.0" layoutY="21.0" prefHeight="20.0" prefWidth="102.0" text="Statistics" />
-                                    <ScrollPane hbarPolicy="NEVER" layoutX="230.0" layoutY="41.0" pannable="true" prefHeight="158.0" prefWidth="143.0" vbarPolicy="NEVER">
-                                       <content>
-                                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="156.0" prefWidth="150.0">
-                                             <children>
-                                                <TextArea fx:id="statOutput" editable="false" layoutX="-5.0" prefHeight="158.0" prefWidth="149.0" style="-fx-opacity: 1;" wrapText="true" />
-                                             </children>
-                                          </AnchorPane>
-                                       </content>
-                                    </ScrollPane>
-                                    <Label layoutX="69.0" layoutY="53.0" prefHeight="20.0" prefWidth="61.0" text="Player 1" />
-                                    <Label layoutX="67.0" layoutY="87.0" prefHeight="20.0" prefWidth="45.0" text="Pawn =" />
-                                    <Label layoutX="67.0" layoutY="107.0" prefHeight="20.0" prefWidth="45.0" text="Lance =" />
-                                    <Label layoutX="67.0" layoutY="127.0" prefHeight="20.0" prefWidth="53.0" text="Knight =" />
-                                    <Label layoutX="67.0" layoutY="147.0" prefHeight="20.0" prefWidth="86.0" text="Silver General =" />
-                                    <Label layoutX="67.0" layoutY="167.0" prefHeight="20.0" prefWidth="86.0" text="Gold General =" />
-                                    <Label layoutX="69.0" layoutY="187.0" prefHeight="20.0" prefWidth="53.0" text="Bishop =" />
-                                    <Label layoutX="69.0" layoutY="207.0" prefHeight="20.0" prefWidth="45.0" text="Rook =" />
-                                    <Label layoutX="428.0" layoutY="45.0" prefHeight="20.0" prefWidth="102.0" text="Player 2" />
-                                    <Label fx:id="P0" layoutX="114.0" layoutY="89.0" text="0" />
-                                    <Label fx:id="L0" layoutX="119.0" layoutY="109.0" text="0" />
-                                    <Label fx:id="N0" layoutX="123.0" layoutY="129.0" text="0" />
-                                    <Label fx:id="S0" layoutX="159.0" layoutY="150.0" text="0" />
-                                    <Label fx:id="G0" layoutX="156.0" layoutY="169.0" text="0" />
-                                    <Label fx:id="B0" layoutX="123.0" layoutY="189.0" text="0" />
-                                    <Label fx:id="R0" layoutX="113.0" layoutY="210.0" text="0" />
-                                    <Label layoutX="430.0" layoutY="74.0" prefHeight="20.0" prefWidth="45.0" text="Pawn =" />
-                                    <Label layoutX="430.0" layoutY="94.0" prefHeight="20.0" prefWidth="45.0" text="Lance =" />
-                                    <Label layoutX="430.0" layoutY="114.0" prefHeight="20.0" prefWidth="53.0" text="Knight =" />
-                                    <Label layoutX="430.0" layoutY="134.0" prefHeight="20.0" prefWidth="86.0" text="Silver General =" />
-                                    <Label layoutX="430.0" layoutY="154.0" prefHeight="20.0" prefWidth="86.0" text="Gold General =" />
-                                    <Label layoutX="432.0" layoutY="174.0" prefHeight="20.0" prefWidth="53.0" text="Bishop =" />
-                                    <Label layoutX="432.0" layoutY="194.0" prefHeight="20.0" prefWidth="45.0" text="Rook =" />
-                                    <Label fx:id="P1" layoutX="477.0" layoutY="76.0" text="0" />
-                                    <Label fx:id="L1" layoutX="482.0" layoutY="96.0" text="0" />
-                                    <Label fx:id="N1" layoutX="486.0" layoutY="116.0" text="0" />
-                                    <Label fx:id="S1" layoutX="522.0" layoutY="137.0" text="0" />
-                                    <Label fx:id="G1" layoutX="519.0" layoutY="156.0" text="0" />
-                                    <Label fx:id="B1" layoutX="486.0" layoutY="176.0" text="0" />
-                                    <Label fx:id="R1" layoutX="476.0" layoutY="197.0" text="0" />
-                                    <Label layoutX="69.0" layoutY="250.0" prefHeight="35.0" prefWidth="168.0" text="Player 1 Timer">
-                                       <font>
-                                          <Font size="24.0" />
-                                       </font>
-                                    </Label>
-                                    <Label layoutX="347.0" layoutY="250.0" prefHeight="35.0" prefWidth="162.0" text="Player 2 Timer">
-                                       <font>
-                                          <Font size="24.0" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="p1Timer" layoutX="130.0" layoutY="302.0" prefHeight="35.0" prefWidth="53.0" text="00:00" textAlignment="CENTER">
-                                       <font>
-                                          <Font size="18.0" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="p2Timer" layoutX="406.0" layoutY="302.0" prefHeight="35.0" prefWidth="53.0" text="00:00" textAlignment="CENTER">
-                                       <font>
-                                          <Font size="18.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </AnchorPane>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="473.0" prefWidth="603.0">
-                                 <children>
-                                    <Label layoutX="14.0" layoutY="9.0" prefHeight="17.0" prefWidth="53.0" text="Chat" />
-                                    <Button fx:id="chatSendButton" layoutX="521.0" layoutY="506.0" mnemonicParsing="false" onMouseClicked="#sendMessage" prefHeight="36.0" prefWidth="61.0" text="Send" />
-                                    <ScrollPane hbarPolicy="NEVER" layoutX="1.0" layoutY="37.0" prefHeight="400.0" prefWidth="600.0" vbarPolicy="ALWAYS">
-                                      <content>
-                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="600.0">
-                                             <children>
-                                                <TextArea fx:id="chatOutputField" disable="true" layoutX="-1.0" prefHeight="400.0" prefWidth="600.0" wrapText="true" />
-                                             </children>
-                                          </AnchorPane>
-                                      </content>
-                                    </ScrollPane>
-                                    <ScrollPane hbarPolicy="NEVER" layoutX="14.0" layoutY="474.0" prefHeight="100.0" prefWidth="475.0" vbarPolicy="ALWAYS">
-                                      <content>
-                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="475.0">
-                                             <children>
-                                                <TextArea fx:id="chatInputField" prefHeight="100.0" prefWidth="475.0" promptText="Write something..." wrapText="true" />
-                                             </children>
-                                          </AnchorPane>
-                                      </content>
-                                    </ScrollPane>
-                                 </children>
-                              </AnchorPane>
-                          </items>
-                        </SplitPane>
-                     </children>
-                  </AnchorPane>
-              </items>
-            </SplitPane>
-         </children>
-    </AnchorPane>
-  </children>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                            <children>
+                                <SplitPane dividerPositions="0.43387250237868696" orientation="VERTICAL"
+                                           prefHeight="1053.0" prefWidth="605.0">
+                                    <items>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="511.0" prefWidth="603.0">
+                                            <children>
+                                                <Label layoutX="14.0" layoutY="21.0" prefHeight="20.0" prefWidth="102.0"
+                                                       text="Statistics"/>
+                                                <ScrollPane hbarPolicy="NEVER" layoutX="230.0" layoutY="41.0"
+                                                            pannable="true" prefHeight="158.0" prefWidth="143.0"
+                                                            vbarPolicy="NEVER">
+                                                    <content>
+                                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="156.0"
+                                                                    prefWidth="150.0">
+                                                            <children>
+                                                                <TextArea fx:id="statOutput" editable="false"
+                                                                          layoutX="-5.0" prefHeight="158.0"
+                                                                          prefWidth="149.0" style="-fx-opacity: 1;"
+                                                                          wrapText="true"/>
+                                                            </children>
+                                                        </AnchorPane>
+                                                    </content>
+                                                </ScrollPane>
+                                                <Label layoutX="69.0" layoutY="53.0" prefHeight="20.0" prefWidth="61.0"
+                                                       text="Player 1"/>
+                                                <Label layoutX="67.0" layoutY="87.0" prefHeight="20.0" prefWidth="45.0"
+                                                       text="Pawn ="/>
+                                                <Label layoutX="67.0" layoutY="107.0" prefHeight="20.0" prefWidth="45.0"
+                                                       text="Lance ="/>
+                                                <Label layoutX="67.0" layoutY="127.0" prefHeight="20.0" prefWidth="53.0"
+                                                       text="Knight ="/>
+                                                <Label layoutX="67.0" layoutY="147.0" prefHeight="20.0" prefWidth="86.0"
+                                                       text="Silver General ="/>
+                                                <Label layoutX="67.0" layoutY="167.0" prefHeight="20.0" prefWidth="86.0"
+                                                       text="Gold General ="/>
+                                                <Label layoutX="69.0" layoutY="187.0" prefHeight="20.0" prefWidth="53.0"
+                                                       text="Bishop ="/>
+                                                <Label layoutX="69.0" layoutY="207.0" prefHeight="20.0" prefWidth="45.0"
+                                                       text="Rook ="/>
+                                                <Label layoutX="428.0" layoutY="45.0" prefHeight="20.0"
+                                                       prefWidth="102.0" text="Player 2"/>
+                                                <Label fx:id="P0" layoutX="114.0" layoutY="89.0" text="0"/>
+                                                <Label fx:id="L0" layoutX="119.0" layoutY="109.0" text="0"/>
+                                                <Label fx:id="N0" layoutX="123.0" layoutY="129.0" text="0"/>
+                                                <Label fx:id="S0" layoutX="159.0" layoutY="150.0" text="0"/>
+                                                <Label fx:id="G0" layoutX="156.0" layoutY="169.0" text="0"/>
+                                                <Label fx:id="B0" layoutX="123.0" layoutY="189.0" text="0"/>
+                                                <Label fx:id="R0" layoutX="113.0" layoutY="210.0" text="0"/>
+                                                <Label layoutX="430.0" layoutY="74.0" prefHeight="20.0" prefWidth="45.0"
+                                                       text="Pawn ="/>
+                                                <Label layoutX="430.0" layoutY="94.0" prefHeight="20.0" prefWidth="45.0"
+                                                       text="Lance ="/>
+                                                <Label layoutX="430.0" layoutY="114.0" prefHeight="20.0"
+                                                       prefWidth="53.0" text="Knight ="/>
+                                                <Label layoutX="430.0" layoutY="134.0" prefHeight="20.0"
+                                                       prefWidth="86.0" text="Silver General ="/>
+                                                <Label layoutX="430.0" layoutY="154.0" prefHeight="20.0"
+                                                       prefWidth="86.0" text="Gold General ="/>
+                                                <Label layoutX="432.0" layoutY="174.0" prefHeight="20.0"
+                                                       prefWidth="53.0" text="Bishop ="/>
+                                                <Label layoutX="432.0" layoutY="194.0" prefHeight="20.0"
+                                                       prefWidth="45.0" text="Rook ="/>
+                                                <Label fx:id="P1" layoutX="477.0" layoutY="76.0" text="0"/>
+                                                <Label fx:id="L1" layoutX="482.0" layoutY="96.0" text="0"/>
+                                                <Label fx:id="N1" layoutX="486.0" layoutY="116.0" text="0"/>
+                                                <Label fx:id="S1" layoutX="522.0" layoutY="137.0" text="0"/>
+                                                <Label fx:id="G1" layoutX="519.0" layoutY="156.0" text="0"/>
+                                                <Label fx:id="B1" layoutX="486.0" layoutY="176.0" text="0"/>
+                                                <Label fx:id="R1" layoutX="476.0" layoutY="197.0" text="0"/>
+                                                <Label layoutX="69.0" layoutY="250.0" prefHeight="35.0"
+                                                       prefWidth="168.0" text="Player 1 Timer">
+                                                    <font>
+                                                        <Font size="24.0"/>
+                                                    </font>
+                                                </Label>
+                                                <Label layoutX="347.0" layoutY="250.0" prefHeight="35.0"
+                                                       prefWidth="162.0" text="Player 2 Timer">
+                                                    <font>
+                                                        <Font size="24.0"/>
+                                                    </font>
+                                                </Label>
+                                                <Label fx:id="p1Timer" layoutX="130.0" layoutY="302.0" prefHeight="35.0"
+                                                       prefWidth="53.0" text="00:00" textAlignment="CENTER">
+                                                    <font>
+                                                        <Font size="18.0"/>
+                                                    </font>
+                                                </Label>
+                                                <Label fx:id="p2Timer" layoutX="406.0" layoutY="302.0" prefHeight="35.0"
+                                                       prefWidth="53.0" text="00:00" textAlignment="CENTER">
+                                                    <font>
+                                                        <Font size="18.0"/>
+                                                    </font>
+                                                </Label>
+                                            </children>
+                                        </AnchorPane>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="473.0" prefWidth="603.0">
+                                            <children>
+                                                <Label layoutX="14.0" layoutY="9.0" prefHeight="17.0" prefWidth="53.0"
+                                                       text="Chat"/>
+                                                <Button fx:id="chatSendButton" layoutX="521.0" layoutY="506.0"
+                                                        mnemonicParsing="false" onMouseClicked="#sendMessage"
+                                                        prefHeight="36.0" prefWidth="61.0" text="Send"/>
+                                                <ScrollPane hbarPolicy="NEVER" layoutX="1.0" layoutY="37.0"
+                                                            prefHeight="400.0" prefWidth="600.0" vbarPolicy="ALWAYS">
+                                                    <content>
+                                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="400.0"
+                                                                    prefWidth="600.0">
+                                                            <children>
+                                                                <TextArea fx:id="chatOutputField" disable="true"
+                                                                          layoutX="-1.0" prefHeight="400.0"
+                                                                          prefWidth="600.0" wrapText="true"/>
+                                                            </children>
+                                                        </AnchorPane>
+                                                    </content>
+                                                </ScrollPane>
+                                                <ScrollPane hbarPolicy="NEVER" layoutX="14.0" layoutY="474.0"
+                                                            prefHeight="100.0" prefWidth="475.0" vbarPolicy="ALWAYS">
+                                                    <content>
+                                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0"
+                                                                    prefWidth="475.0">
+                                                            <children>
+                                                                <TextArea fx:id="chatInputField" prefHeight="100.0"
+                                                                          prefWidth="475.0"
+                                                                          promptText="Write something..."
+                                                                          wrapText="true"/>
+                                                            </children>
+                                                        </AnchorPane>
+                                                    </content>
+                                                </ScrollPane>
+                                            </children>
+                                        </AnchorPane>
+                                    </items>
+                                </SplitPane>
+                            </children>
+                        </AnchorPane>
+                    </items>
+                </SplitPane>
+            </children>
+        </AnchorPane>
+    </children>
 </VBox>

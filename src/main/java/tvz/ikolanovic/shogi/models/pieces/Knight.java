@@ -52,6 +52,7 @@ public class Knight extends Piece {
 
         return squares;
     }
+
     public String getAcronym() {
         return "N";
     }

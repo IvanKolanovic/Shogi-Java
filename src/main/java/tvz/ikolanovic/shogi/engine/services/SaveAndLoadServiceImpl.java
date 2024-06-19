@@ -57,6 +57,7 @@ public class SaveAndLoadServiceImpl implements SaveAndLoadService {
             ex.printStackTrace();
         }
     }
+
     @Override
     public void loadGame(GridPane boardGrid, TextArea statOutput, Label p1Timer, Label p2Timer) {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("saveGame/gameSave.dat"))) {

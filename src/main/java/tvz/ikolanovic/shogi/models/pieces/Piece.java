@@ -26,8 +26,8 @@ public abstract class Piece implements Serializable {
     /**
      * Gets possible moves.
      *
-     * @param x     the x
-     * @param y     the y
+     * @param x          the x
+     * @param y          the y
      * @param gameEngine the board
      * @return the possible moves
      */

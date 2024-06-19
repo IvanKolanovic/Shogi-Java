@@ -47,6 +47,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <VBox prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tvz.ikolanovic.shogi.controllers.BoardController">
   <children>
@@ -113,51 +114,71 @@
                      <children>
                         <SplitPane dividerPositions="0.43387250237868696" orientation="VERTICAL" prefHeight="1053.0" prefWidth="605.0">
                           <items>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="450.0" prefWidth="494.0">
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="511.0" prefWidth="603.0">
                                  <children>
                                     <Label layoutX="14.0" layoutY="21.0" prefHeight="20.0" prefWidth="102.0" text="Statistics" />
                                     <ScrollPane hbarPolicy="NEVER" layoutX="230.0" layoutY="41.0" pannable="true" prefHeight="158.0" prefWidth="143.0" vbarPolicy="NEVER">
                                        <content>
-                                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="156.0" prefWidth="600.0">
+                                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="156.0" prefWidth="150.0">
                                              <children>
                                                 <TextArea fx:id="statOutput" editable="false" layoutX="-5.0" prefHeight="158.0" prefWidth="149.0" style="-fx-opacity: 1;" wrapText="true" />
                                              </children>
                                           </AnchorPane>
                                        </content>
                                     </ScrollPane>
-                                    <Label layoutX="147.0" layoutY="217.0" prefHeight="20.0" prefWidth="61.0" text="Player 1" />
-                                    <Label layoutX="145.0" layoutY="251.0" prefHeight="20.0" prefWidth="45.0" text="Pawn =" />
-                                    <Label layoutX="145.0" layoutY="271.0" prefHeight="20.0" prefWidth="45.0" text="Lance =" />
-                                    <Label layoutX="145.0" layoutY="291.0" prefHeight="20.0" prefWidth="53.0" text="Knight =" />
-                                    <Label layoutX="145.0" layoutY="311.0" prefHeight="20.0" prefWidth="86.0" text="Silver General =" />
-                                    <Label layoutX="145.0" layoutY="331.0" prefHeight="20.0" prefWidth="86.0" text="Gold General =" />
-                                    <Label layoutX="147.0" layoutY="351.0" prefHeight="20.0" prefWidth="53.0" text="Bishop =" />
-                                    <Label layoutX="147.0" layoutY="371.0" prefHeight="20.0" prefWidth="45.0" text="Rook =" />
-                                    <Label layoutX="373.0" layoutY="215.0" prefHeight="20.0" prefWidth="102.0" text="Player 2" />
-                                    <Label fx:id="P0" layoutX="192.0" layoutY="253.0" text="0" />
-                                    <Label fx:id="L0" layoutX="197.0" layoutY="273.0" text="0" />
-                                    <Label fx:id="N0" layoutX="201.0" layoutY="293.0" text="0" />
-                                    <Label fx:id="S0" layoutX="237.0" layoutY="314.0" text="0" />
-                                    <Label fx:id="G0" layoutX="234.0" layoutY="333.0" text="0" />
-                                    <Label fx:id="B0" layoutX="201.0" layoutY="353.0" text="0" />
-                                    <Label fx:id="R0" layoutX="191.0" layoutY="374.0" text="0" />
-                                    <Label layoutX="375.0" layoutY="244.0" prefHeight="20.0" prefWidth="45.0" text="Pawn =" />
-                                    <Label layoutX="375.0" layoutY="264.0" prefHeight="20.0" prefWidth="45.0" text="Lance =" />
-                                    <Label layoutX="375.0" layoutY="284.0" prefHeight="20.0" prefWidth="53.0" text="Knight =" />
-                                    <Label layoutX="375.0" layoutY="304.0" prefHeight="20.0" prefWidth="86.0" text="Silver General =" />
-                                    <Label layoutX="375.0" layoutY="324.0" prefHeight="20.0" prefWidth="86.0" text="Gold General =" />
-                                    <Label layoutX="377.0" layoutY="344.0" prefHeight="20.0" prefWidth="53.0" text="Bishop =" />
-                                    <Label layoutX="377.0" layoutY="364.0" prefHeight="20.0" prefWidth="45.0" text="Rook =" />
-                                    <Label fx:id="P1" layoutX="422.0" layoutY="246.0" text="0" />
-                                    <Label fx:id="L1" layoutX="427.0" layoutY="266.0" text="0" />
-                                    <Label fx:id="N1" layoutX="431.0" layoutY="286.0" text="0" />
-                                    <Label fx:id="S1" layoutX="467.0" layoutY="307.0" text="0" />
-                                    <Label fx:id="G1" layoutX="464.0" layoutY="326.0" text="0" />
-                                    <Label fx:id="B1" layoutX="431.0" layoutY="346.0" text="0" />
-                                    <Label fx:id="R1" layoutX="421.0" layoutY="367.0" text="0" />
+                                    <Label layoutX="69.0" layoutY="53.0" prefHeight="20.0" prefWidth="61.0" text="Player 1" />
+                                    <Label layoutX="67.0" layoutY="87.0" prefHeight="20.0" prefWidth="45.0" text="Pawn =" />
+                                    <Label layoutX="67.0" layoutY="107.0" prefHeight="20.0" prefWidth="45.0" text="Lance =" />
+                                    <Label layoutX="67.0" layoutY="127.0" prefHeight="20.0" prefWidth="53.0" text="Knight =" />
+                                    <Label layoutX="67.0" layoutY="147.0" prefHeight="20.0" prefWidth="86.0" text="Silver General =" />
+                                    <Label layoutX="67.0" layoutY="167.0" prefHeight="20.0" prefWidth="86.0" text="Gold General =" />
+                                    <Label layoutX="69.0" layoutY="187.0" prefHeight="20.0" prefWidth="53.0" text="Bishop =" />
+                                    <Label layoutX="69.0" layoutY="207.0" prefHeight="20.0" prefWidth="45.0" text="Rook =" />
+                                    <Label layoutX="428.0" layoutY="45.0" prefHeight="20.0" prefWidth="102.0" text="Player 2" />
+                                    <Label fx:id="P0" layoutX="114.0" layoutY="89.0" text="0" />
+                                    <Label fx:id="L0" layoutX="119.0" layoutY="109.0" text="0" />
+                                    <Label fx:id="N0" layoutX="123.0" layoutY="129.0" text="0" />
+                                    <Label fx:id="S0" layoutX="159.0" layoutY="150.0" text="0" />
+                                    <Label fx:id="G0" layoutX="156.0" layoutY="169.0" text="0" />
+                                    <Label fx:id="B0" layoutX="123.0" layoutY="189.0" text="0" />
+                                    <Label fx:id="R0" layoutX="113.0" layoutY="210.0" text="0" />
+                                    <Label layoutX="430.0" layoutY="74.0" prefHeight="20.0" prefWidth="45.0" text="Pawn =" />
+                                    <Label layoutX="430.0" layoutY="94.0" prefHeight="20.0" prefWidth="45.0" text="Lance =" />
+                                    <Label layoutX="430.0" layoutY="114.0" prefHeight="20.0" prefWidth="53.0" text="Knight =" />
+                                    <Label layoutX="430.0" layoutY="134.0" prefHeight="20.0" prefWidth="86.0" text="Silver General =" />
+                                    <Label layoutX="430.0" layoutY="154.0" prefHeight="20.0" prefWidth="86.0" text="Gold General =" />
+                                    <Label layoutX="432.0" layoutY="174.0" prefHeight="20.0" prefWidth="53.0" text="Bishop =" />
+                                    <Label layoutX="432.0" layoutY="194.0" prefHeight="20.0" prefWidth="45.0" text="Rook =" />
+                                    <Label fx:id="P1" layoutX="477.0" layoutY="76.0" text="0" />
+                                    <Label fx:id="L1" layoutX="482.0" layoutY="96.0" text="0" />
+                                    <Label fx:id="N1" layoutX="486.0" layoutY="116.0" text="0" />
+                                    <Label fx:id="S1" layoutX="522.0" layoutY="137.0" text="0" />
+                                    <Label fx:id="G1" layoutX="519.0" layoutY="156.0" text="0" />
+                                    <Label fx:id="B1" layoutX="486.0" layoutY="176.0" text="0" />
+                                    <Label fx:id="R1" layoutX="476.0" layoutY="197.0" text="0" />
+                                    <Label layoutX="69.0" layoutY="250.0" prefHeight="35.0" prefWidth="168.0" text="Player 1 Timer">
+                                       <font>
+                                          <Font size="24.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="347.0" layoutY="250.0" prefHeight="35.0" prefWidth="162.0" text="Player 2 Timer">
+                                       <font>
+                                          <Font size="24.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="p1Timer" layoutX="130.0" layoutY="302.0" prefHeight="35.0" prefWidth="53.0" text="00:00" textAlignment="CENTER">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="p2Timer" layoutX="406.0" layoutY="302.0" prefHeight="35.0" prefWidth="53.0" text="00:00" textAlignment="CENTER">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
                                  </children>
                               </AnchorPane>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="228.0" prefWidth="318.0">
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="473.0" prefWidth="603.0">
                                  <children>
                                     <Label layoutX="14.0" layoutY="9.0" prefHeight="17.0" prefWidth="53.0" text="Chat" />
                                     <Button fx:id="chatSendButton" layoutX="521.0" layoutY="506.0" mnemonicParsing="false" onMouseClicked="#sendMessage" prefHeight="36.0" prefWidth="61.0" text="Send" />

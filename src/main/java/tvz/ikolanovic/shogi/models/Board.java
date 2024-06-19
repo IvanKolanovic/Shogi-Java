@@ -18,9 +18,7 @@ import tvz.ikolanovic.shogi.models.pieces.*;
 import tvz.ikolanovic.shogi.models.utils.DialogUtils;
 import tvz.ikolanovic.shogi.models.utils.HighlightedCoordinate;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Vector;
+import java.util.*;
 
 /**
  * The type Board.
@@ -35,20 +33,48 @@ public class Board {
     public static Square[][] squares;
     private List<HighlightedCoordinate> highlightedCoordinates;
     private Square selectedSquarePiece;
-    private Vector<String> moveHistory = new Vector<>();
-    private Boolean isOpponentsTurn;
+    private List<String> moveHistory = new ArrayList<>();
+    private PlayerTimer player1Timer;
+    private PlayerTimer player2Timer;
+    public static Boolean gameStarted;
+    public static Boolean isOpponentsTurn;
+    private boolean outOfTime = false;
+    public static final List<String> pieceAcronyms = Arrays.asList(
+            "B",
+            "G",
+            "N",
+            "L",
+            "P",
+            "R",
+            "S"
+    );
 
     /**
      * Instantiates a new Board.
      */
     public Board() {
-        this.squares = new Square[9][9];
+        squares = new Square[9][9];
         this.selectedSquarePiece = new Square(-1, -1, null); // default non-existing square
         this.highlightedCoordinates = new ArrayList<>();
-        this.isOpponentsTurn = Boolean.FALSE;
+        isOpponentsTurn = Boolean.FALSE;
+        gameStarted = false;
     }
 
-    public void gameLogic(Node clickedNode, GridPane boardGrid, TextArea statOutput) {
+    public void gameLogic(Node clickedNode, GridPane boardGrid, TextArea statOutput, Label p1Timer, Label p2Timer) {
+        if (!gameStarted) {
+            if (player1Timer != null && player2Timer != null) {
+                if (player1Timer.isRunning() || player2Timer.isRunning()) {
+                    stopTimers();
+                }
+                return;
+            }
+
+            gameStarted = true;
+            this.player1Timer = new PlayerTimer(10, p1Timer,"Player 1 Timer");
+            this.player2Timer = new PlayerTimer(300, p2Timer,"Player 2 Timer");
+            this.startTimer();
+        }
+
         // click on descendant node
         Integer row = GridPane.getRowIndex(clickedNode);
         Integer column = GridPane.getColumnIndex(clickedNode);
@@ -61,9 +87,10 @@ public class Board {
         } else {
             ShogiGameEngine.getInstance().getGameBoard().pieceClicked(row, column, boardGrid);
         }
-        if(isCheck()){
+        if (isCheck()) {
             System.out.println("King is in Check!");
             DialogUtils.showWinningDialog(isOpponentsTurn ? "Player 1" : "Player 2");
+            stopTimers();
         }
     }
 
@@ -85,8 +112,8 @@ public class Board {
         for (int row = 0; row < SIZE; row++) {
             checkAndBuildMiddleRow(boardGrid, row);
             for (int col = 0; col < SIZE; col++) {
-               checkAndBuildBackRow(boardGrid, row, col);
-               checkAndBuildFrontRow(boardGrid, row, col);
+                checkAndBuildBackRow(boardGrid, row, col);
+                checkAndBuildFrontRow(boardGrid, row, col);
             }
         }
         populateAllEmptySquares(boardGrid);
@@ -236,12 +263,13 @@ public class Board {
         boardGrid.getChildren().removeIf(node -> !(node instanceof Group)
                 && GridPane.getColumnIndex(node) == oldColumn
                 && GridPane.getRowIndex(node) == oldRow);
+        setEmptyPieceOnBoard(boardGrid, oldRow, oldColumn);
         // write stat
         this.checkMoveType(boardGrid, oldSquare, newRow, newColumn, statOutput);
 
         if (squares[newRow][newColumn].getPiece() == null) {
             // place empty on ol
-            this.setEmptyPieceOnBoard(boardGrid, oldRow, oldColumn);
+            setEmptyPieceOnBoard(boardGrid, oldRow, oldColumn);
         } else if (squares[newRow][newColumn].getPiece() != null) {
             // remove opponent
             boardGrid.getChildren().removeIf(node -> !(node instanceof Group)
@@ -250,8 +278,9 @@ public class Board {
         }
         // add new
         boardGrid.add(imageView, newColumn, newRow);
-        this.setPieceOnBoard(boardGrid, newRow, newColumn, oldSquare.getPiece());
-        this.isOpponentsTurn = !this.isOpponentsTurn;
+        setPieceOnBoard(boardGrid, newRow, newColumn, oldSquare.getPiece());
+        isOpponentsTurn = !isOpponentsTurn;
+        this.switchTurn();
     }
 
     /**
@@ -316,11 +345,11 @@ public class Board {
     public static void setPieceOnBoard(GridPane boardGrid, int row, int col, Piece piece) {
         squares[row][col] = new Square(row, col, piece);
         ImageView imageView = new ImageView();
-        if (piece == null){
+        if (piece == null) {
             imageView.setImage(new Image("File:pieces/empty.png"));
             imageView.setFitWidth(70);
             imageView.setFitHeight(65);
-        } else{
+        } else {
             imageView.setImage(new Image("File:pieces/literal/" + piece.getSymbol() + ".png"));
             imageView.setFitWidth(70);
             imageView.setFitHeight(65);
@@ -337,6 +366,7 @@ public class Board {
         imageView.setFitHeight(65);
         boardGrid.add(imageView, col, row);
     }
+
     public boolean isCheck() {
         // Find the king first
         Square kingSquare = findKingSquare();
@@ -349,7 +379,7 @@ public class Board {
             for (int col = 0; col < SIZE; col++) {
                 Piece piece = squares[row][col].getPiece();
                 if (piece != null && piece.isInverted() != isOpponentsTurn) { // Check opposing pieces
-                    if (piece.canMoveTo(piece.getPossibleMoves(row,col,this),kingRow, kingCol)) {
+                    if (piece.canMoveTo(piece.getPossibleMoves(row, col, this), kingRow, kingCol)) {
                         return true; // King is in check
 
                     }
@@ -419,4 +449,58 @@ public class Board {
     }
 
 
+    public PlayerOutPieces getPlayerOutPieces() {
+        Map<String, String> player1 = new HashMap<>();
+        Map<String, String> player2 = new HashMap<>();
+
+        for (String pieceAcronym : pieceAcronyms) {
+            String id = "#" + pieceAcronym;
+
+            Label p1 = (Label) ShogiGameEngine.getInstance().getStage().getScene().lookup(id + 0);
+            Label p2 = (Label) ShogiGameEngine.getInstance().getStage().getScene().lookup(id + 1);
+
+            if (p1 == null) {
+                player1.put(id + 0, "0");
+                continue;
+            }
+            if (p2 == null) {
+                player2.put(id + 1, "0");
+                continue;
+            }
+            player1.put(id + 0, p1.getText());
+            player2.put(id + 1, p2.getText());
+        }
+
+        return new PlayerOutPieces(player1, player2);
+    }
+
+    public void startTimer() {
+        player1Timer.start();
+        player2Timer.start();
+        player2Timer.pause();
+        player1Timer.resume(); // Start with player 1
+    }
+
+    public void switchTurn() {
+        if (isOpponentsTurn) {
+            player1Timer.pause();
+            player2Timer.resume();
+        } else {
+            player2Timer.pause();
+            player1Timer.resume();
+        }
+    }
+
+    public int getPlayer1TimeLeft() {
+        return player1Timer.getTimeLeft();
+    }
+
+    public int getPlayer2TimeLeft() {
+        return player2Timer.getTimeLeft();
+    }
+
+    public void stopTimers() {
+        player1Timer.stop();
+        player2Timer.stop();
+    }
 }

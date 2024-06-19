@@ -5,11 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import lombok.SneakyThrows;
-import tvz.ikolanovic.shogi.controllers.GameController;
-import tvz.ikolanovic.shogi.engine.ShogiGameEngine;
-import tvz.ikolanovic.shogi.models.Board;
-
-import java.net.ServerSocket;
+import tvz.ikolanovic.shogi.engine.GameEngine;
 
 /**
  * The type Shogi board game.
@@ -30,12 +26,12 @@ public class ShogiBoardGame extends Application
     @SneakyThrows
     public void initialize(Stage stage)
     {
-        FXMLLoader fxmlLoader = new FXMLLoader(ShogiBoardGame.class.getResource("enter-username.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Shogi - Enter username");
+        FXMLLoader fxmlLoader = new FXMLLoader(ShogiBoardGame.class.getResource("board-game-dark.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 1920, 1080);
+        stage.setTitle("Shogi - Japanese Chess");
         stage.setScene(scene);
         stage.show();
-        ShogiGameEngine.getInstance().setStage(stage);
+        GameEngine.getInstance().setStage(stage);
     }
 
     /**

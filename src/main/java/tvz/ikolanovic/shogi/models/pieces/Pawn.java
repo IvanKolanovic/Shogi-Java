@@ -1,6 +1,6 @@
 package tvz.ikolanovic.shogi.models.pieces;
 
-import tvz.ikolanovic.shogi.models.Board;
+import tvz.ikolanovic.shogi.engine.GameEngine;
 import tvz.ikolanovic.shogi.models.Square;
 
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ public class Pawn extends Piece {
     }
 
     @Override
-    public List<Square> getPossibleMoves(int x, int y, Board board) {
+    public List<Square> getPossibleMoves(int x, int y, GameEngine gameEngine) {
         List<Square> squares = new ArrayList<>();
 
         // Determine the direction based on the piece's side
@@ -32,7 +32,7 @@ public class Pawn extends Piece {
 
         // Check if the move is within the board and the target cell is empty or contains an opponent's piece
         if (targetX >= 0 && targetX < 9) { // Assuming 0-indexed board
-            Square targetSquare = board.getSquare(targetX, y);
+            Square targetSquare = gameEngine.getSquare(targetX, y);
             Piece targetPiece = targetSquare == null ? null : targetSquare.getPiece();
             if (targetPiece == null || targetPiece.getOwner() != this.getOwner()) { // Can move or capture
                 squares.add(new Square(targetX, y, targetPiece));

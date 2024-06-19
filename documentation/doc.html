@@ -51,17 +51,17 @@
 <h3>Fields:</h3>
 <p>private static tvz.ikolanovic.shogi.engine.ShogiGameEngine INSTANCE</p>
 <p>private javafx.stage.Stage stage</p>
-<p>private tvz.ikolanovic.shogi.models.Board gameBoard</p>
+<p>private tvz.ikolanovic.shogi.engine.GameEngine gameBoard</p>
 <h3>Constructors:</h3>
 <p>private tvz.ikolanovic.shogi.engine.ShogiGameEngine()</p>
 <h3>Methods:</h3>
 <p>public javafx.stage.Stage getStage()</p>
 <p>public void setUpBoard()</p>
-<p>public tvz.ikolanovic.shogi.models.Board getGameBoard()</p>
-<p>public void setGameBoard(tvz.ikolanovic.shogi.models.Board arg0)</p>
+<p>public tvz.ikolanovic.shogi.engine.GameEngine getGameBoard()</p>
+<p>public void setGameBoard(tvz.ikolanovic.shogi.engine.GameEngine arg0)</p>
 <p>public static tvz.ikolanovic.shogi.engine.ShogiGameEngine getInstance()</p>
 <p>public void setStage(javafx.stage.Stage arg0)</p>
-<h2>public tvz.ikolanovic.shogi.models.Board</h2>
+<h2>public tvz.ikolanovic.shogi.engine.GameEngine</h2>
 <h3>Fields:</h3>
 <p>public static final int SIZE</p>
 <p>public static [[Ltvz.ikolanovic.shogi.models.Square; squares</p>
@@ -148,37 +148,37 @@
 <p>public tvz.ikolanovic.shogi.models.pieces.Bishop(int arg0, boolean arg1)</p>
 <h3>Methods:</h3>
 <p>public java.lang.String getAcronym()</p>
-<p>public java.util.List getPossibleMoves(int arg0, int arg1, tvz.ikolanovic.shogi.models.Board arg2)</p>
+<p>public java.util.List getPossibleMoves(int arg0, int arg1, tvz.ikolanovic.shogi.engine.GameEngine arg2)</p>
 <h2>public tvz.ikolanovic.shogi.models.pieces.GoldGeneral</h2>
 <h3>Constructors:</h3>
 <p>public tvz.ikolanovic.shogi.models.pieces.GoldGeneral(int arg0, boolean arg1)</p>
 <h3>Methods:</h3>
 <p>public java.lang.String getAcronym()</p>
-<p>public java.util.List getPossibleMoves(int arg0, int arg1, tvz.ikolanovic.shogi.models.Board arg2)</p>
+<p>public java.util.List getPossibleMoves(int arg0, int arg1, tvz.ikolanovic.shogi.engine.GameEngine arg2)</p>
 <h2>public tvz.ikolanovic.shogi.models.pieces.King</h2>
 <h3>Constructors:</h3>
 <p>public tvz.ikolanovic.shogi.models.pieces.King(int arg0, boolean arg1)</p>
 <h3>Methods:</h3>
 <p>public java.lang.String getAcronym()</p>
-<p>public java.util.List getPossibleMoves(int arg0, int arg1, tvz.ikolanovic.shogi.models.Board arg2)</p>
+<p>public java.util.List getPossibleMoves(int arg0, int arg1, tvz.ikolanovic.shogi.engine.GameEngine arg2)</p>
 <h2>public tvz.ikolanovic.shogi.models.pieces.Knight</h2>
 <h3>Constructors:</h3>
 <p>public tvz.ikolanovic.shogi.models.pieces.Knight(int arg0, boolean arg1)</p>
 <h3>Methods:</h3>
 <p>public java.lang.String getAcronym()</p>
-<p>public java.util.List getPossibleMoves(int arg0, int arg1, tvz.ikolanovic.shogi.models.Board arg2)</p>
+<p>public java.util.List getPossibleMoves(int arg0, int arg1, tvz.ikolanovic.shogi.engine.GameEngine arg2)</p>
 <h2>public tvz.ikolanovic.shogi.models.pieces.Lance</h2>
 <h3>Constructors:</h3>
 <p>public tvz.ikolanovic.shogi.models.pieces.Lance(int arg0, boolean arg1)</p>
 <h3>Methods:</h3>
 <p>public java.lang.String getAcronym()</p>
-<p>public java.util.List getPossibleMoves(int arg0, int arg1, tvz.ikolanovic.shogi.models.Board arg2)</p>
+<p>public java.util.List getPossibleMoves(int arg0, int arg1, tvz.ikolanovic.shogi.engine.GameEngine arg2)</p>
 <h2>public tvz.ikolanovic.shogi.models.pieces.Pawn</h2>
 <h3>Constructors:</h3>
 <p>public tvz.ikolanovic.shogi.models.pieces.Pawn(int arg0, boolean arg1)</p>
 <h3>Methods:</h3>
 <p>public java.lang.String getAcronym()</p>
-<p>public java.util.List getPossibleMoves(int arg0, int arg1, tvz.ikolanovic.shogi.models.Board arg2)</p>
+<p>public java.util.List getPossibleMoves(int arg0, int arg1, tvz.ikolanovic.shogi.engine.GameEngine arg2)</p>
 <h2>public abstract tvz.ikolanovic.shogi.models.pieces.Piece</h2>
 <h3>Fields:</h3>
 <p>private java.lang.String symbol</p>
@@ -196,7 +196,7 @@
 <p>public boolean isPromoted()</p>
 <p>public void demote()</p>
 <p>public void promote()</p>
-<p>public java.util.List getPossibleMoves(int arg0, int arg1, tvz.ikolanovic.shogi.models.Board arg2)</p>
+<p>public java.util.List getPossibleMoves(int arg0, int arg1, tvz.ikolanovic.shogi.engine.GameEngine arg2)</p>
 <p>public void setInverted(boolean arg0)</p>
 <p>private static boolean lambda$canMoveTo$0(int arg0, int arg1, tvz.ikolanovic.shogi.models.Square arg2)</p>
 <p>public void setPromoted(boolean arg0)</p>
@@ -208,13 +208,13 @@
 <p>public tvz.ikolanovic.shogi.models.pieces.Rook(int arg0, boolean arg1)</p>
 <h3>Methods:</h3>
 <p>public java.lang.String getAcronym()</p>
-<p>public java.util.List getPossibleMoves(int arg0, int arg1, tvz.ikolanovic.shogi.models.Board arg2)</p>
+<p>public java.util.List getPossibleMoves(int arg0, int arg1, tvz.ikolanovic.shogi.engine.GameEngine arg2)</p>
 <h2>public tvz.ikolanovic.shogi.models.pieces.SilverGeneral</h2>
 <h3>Constructors:</h3>
 <p>public tvz.ikolanovic.shogi.models.pieces.SilverGeneral(int arg0, boolean arg1)</p>
 <h3>Methods:</h3>
 <p>public java.lang.String getAcronym()</p>
-<p>public java.util.List getPossibleMoves(int arg0, int arg1, tvz.ikolanovic.shogi.models.Board arg2)</p>
+<p>public java.util.List getPossibleMoves(int arg0, int arg1, tvz.ikolanovic.shogi.engine.GameEngine arg2)</p>
 <h2>public tvz.ikolanovic.shogi.models.PlayerOutPieces</h2>
 <h3>Fields:</h3>
 <p>private static final long serialVersionUID</p>

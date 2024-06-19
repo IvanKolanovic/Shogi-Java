@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import tvz.ikolanovic.shogi.models.Board;
+import tvz.ikolanovic.shogi.engine.GameEngine;
 import tvz.ikolanovic.shogi.models.Square;
 
 import java.io.Serializable;
@@ -28,11 +28,11 @@ public abstract class Piece implements Serializable {
      *
      * @param x     the x
      * @param y     the y
-     * @param board the board
+     * @param gameEngine the board
      * @return the possible moves
      */
 // Define a method to get possible moves, to be overridden by subclasses
-    public List<Square> getPossibleMoves(int x, int y, Board board) {
+    public List<Square> getPossibleMoves(int x, int y, GameEngine gameEngine) {
         return null;
     }
 

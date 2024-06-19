@@ -1,6 +1,6 @@
 package tvz.ikolanovic.shogi.models.pieces;
 
-import tvz.ikolanovic.shogi.models.Board;
+import tvz.ikolanovic.shogi.engine.GameEngine;
 import tvz.ikolanovic.shogi.models.Square;
 
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ public class Bishop extends Piece {
     }
 
     @Override
-    public List<Square> getPossibleMoves(int x, int y, Board board) {
+    public List<Square> getPossibleMoves(int x, int y, GameEngine gameEngine) {
         List<Square> squares = new ArrayList<>();
         // Define the directions: up-right, up-left, down-right, down-left
         int[][] directions = {{1, 1}, {1, -1}, {-1, 1}, {-1, -1}};
@@ -33,7 +33,7 @@ public class Bishop extends Piece {
             int nextY = y + dy;
 
             while (nextX >= 0 && nextX < 9 && nextY >= 0 && nextY < 9) { // Check board boundaries
-                Square targetSquare = board.getSquare(nextX, nextY);
+                Square targetSquare = gameEngine.getSquare(nextX, nextY);
                 Piece targetPiece = targetSquare == null ? null : targetSquare.getPiece();
 
                 // If there's no piece, it's a valid move

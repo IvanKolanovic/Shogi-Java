@@ -1,6 +1,6 @@
 package tvz.ikolanovic.shogi.models.pieces;
 
-import tvz.ikolanovic.shogi.models.Board;
+import tvz.ikolanovic.shogi.engine.GameEngine;
 import tvz.ikolanovic.shogi.models.Square;
 
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ public class Knight extends Piece {
     }
 
     @Override
-    public List<Square> getPossibleMoves(int x, int y, Board board) {
+    public List<Square> getPossibleMoves(int x, int y, GameEngine gameEngine) {
         List<Square> squares = new ArrayList<>();
 
         // Determine the forward direction based on the piece's side
@@ -40,7 +40,7 @@ public class Knight extends Piece {
 
             // Ensure the move is within the board boundaries
             if (nextX >= 0 && nextX < 9 && nextY >= 0 && nextY < 9) {
-                Square targetSquare = board.getSquare(nextX, nextY);
+                Square targetSquare = gameEngine.getSquare(nextX, nextY);
                 Piece targetPiece = targetSquare == null ? null : targetSquare.getPiece();
 
                 // The square is either empty or contains an opponent's piece (capture)

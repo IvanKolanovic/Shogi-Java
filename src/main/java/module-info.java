@@ -10,6 +10,10 @@ module tvz.ikolanovic.shogi {
     exports tvz.ikolanovic.shogi;
     exports tvz.ikolanovic.shogi.controllers;
     exports tvz.ikolanovic.shogi.engine;
+    exports tvz.ikolanovic.shogi.models;
+    exports tvz.ikolanovic.shogi.models.utils;
+    exports tvz.ikolanovic.shogi.models.pieces;
+
 
     opens tvz.ikolanovic.shogi.controllers to javafx.fxml;
 }

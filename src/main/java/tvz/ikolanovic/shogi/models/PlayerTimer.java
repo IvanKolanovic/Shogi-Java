@@ -5,6 +5,7 @@ import javafx.scene.control.Label;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import tvz.ikolanovic.shogi.engine.GameEngine;
 import tvz.ikolanovic.shogi.models.utils.DialogUtils;
 
 import java.io.Serializable;
@@ -45,20 +46,20 @@ public class PlayerTimer implements Serializable {
         countdownTask = scheduler.scheduleAtFixedRate(() -> {
             synchronized (lock) {
                 if (!running) {
-                    System.out.println(threadName+" blocked. Waiting for turn");
+                    System.out.println(threadName + " blocked. Waiting for turn");
                     return;
                 }
             }
             timeLeft--;
             Platform.runLater(() -> timerLabel.setText(formatTime(timeLeft)));
-            System.out.println(threadName+" Counting: " + formatTime(timeLeft));
+            System.out.println(threadName + " Counting: " + formatTime(timeLeft));
             if (timeLeft <= 0) {
                 running = false;
-                System.out.println(threadName+" has reached 0!");
+                System.out.println(threadName + " has reached 0!");
                 Platform.runLater(() -> timerLabel.setText("Time's up!"));
-                Platform.runLater(() -> DialogUtils.showWinningDialog(Board.isOpponentsTurn ? "Player 1" : "Player 2"));
+                Platform.runLater(() -> DialogUtils.showWinningDialog(GameEngine.getInstance().getIsOpponentsTurn() ? "Player 1" : "Player 2"));
                 countdownTask.cancel(true);
-                Board.gameStarted = false;
+                GameEngine.getInstance().setGameStarted(false);
             }
         }, 0, 1, TimeUnit.SECONDS);
     }

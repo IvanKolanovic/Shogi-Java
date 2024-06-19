@@ -1,6 +1,6 @@
 package tvz.ikolanovic.shogi.models.pieces;
 
-import tvz.ikolanovic.shogi.models.Board;
+import tvz.ikolanovic.shogi.engine.GameEngine;
 import tvz.ikolanovic.shogi.models.Square;
 
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ public class Lance extends Piece {
     }
 
     @Override
-    public List<Square> getPossibleMoves(int x, int y, Board board) {
+    public List<Square> getPossibleMoves(int x, int y, GameEngine gameEngine) {
         List<Square> squares = new ArrayList<>();
         // The Lance moves forward only
         int directionX = 1;  // Assuming the piece moves up the board. Flip the direction if it moves down.
@@ -30,8 +30,8 @@ public class Lance extends Piece {
         int nextX = x + directionX;
 
         // Continue moving forward until hitting the edge of the board or an obstacle
-        while (nextX >= 0 && nextX < Board.SIZE) {
-            Square targetSquare = board.getSquare(nextX, y);
+        while (nextX >= 0 && nextX < GameEngine.SIZE) {
+            Square targetSquare = gameEngine.getSquare(nextX, y);
             if (targetSquare != null) {
                 Piece targetPiece = targetSquare.getPiece();
 

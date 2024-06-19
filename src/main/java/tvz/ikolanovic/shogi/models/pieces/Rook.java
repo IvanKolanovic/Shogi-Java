@@ -1,6 +1,6 @@
 package tvz.ikolanovic.shogi.models.pieces;
 
-import tvz.ikolanovic.shogi.models.Board;
+import tvz.ikolanovic.shogi.engine.GameEngine;
 import tvz.ikolanovic.shogi.models.Square;
 
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ public class Rook extends Piece {
     }
 
     @Override
-    public List<Square> getPossibleMoves(int x, int y, Board board) {
+    public List<Square> getPossibleMoves(int x, int y, GameEngine gameEngine) {
         List<Square> squares = new ArrayList<>();
         // The Rook can move in four directions: up, down, left, right
         int[][] directions = {
@@ -39,8 +39,8 @@ public class Rook extends Piece {
             int nextY = y + dy;
 
             // Continue in each direction until an obstacle is encountered
-            while (nextX >= 0 && nextX < Board.SIZE && nextY >= 0 && nextY < Board.SIZE) {
-                Square targetSquare = board.getSquare(nextX, nextY);
+            while (nextX >= 0 && nextX < GameEngine.SIZE && nextY >= 0 && nextY < GameEngine.SIZE) {
+                Square targetSquare = gameEngine.getSquare(nextX, nextY);
                 if (targetSquare != null) {
                     Piece targetPiece = targetSquare.getPiece();
 

@@ -8,12 +8,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import lombok.Getter;
 import lombok.Setter;
-import tvz.ikolanovic.shogi.engine.ShogiGameEngine;
-import tvz.ikolanovic.shogi.models.*;
+import tvz.ikolanovic.shogi.engine.GameEngine;
 import tvz.ikolanovic.shogi.models.utils.DialogUtils;
 import tvz.ikolanovic.shogi.models.utils.DocumentationUtils;
-
-import java.io.*;
 
 /**
  * The type Board controller.
@@ -30,24 +27,20 @@ public class BoardController {
     @FXML
     private Label p2Timer;
 
+
     /**
      * Initialize.
      */
     @FXML
     public void initialize() {
-        Board.populateBoard(boardGrid);
+        GameEngine.getInstance().getBoardManager().populateBoard(boardGrid);
     }
 
-    /**
-     * Mouse cell clicked.
-     *
-     * @param event the event
-     */
     @FXML
     public void mouseCellClicked(MouseEvent event) {
         Node clickedNode = event.getPickResult().getIntersectedNode();
         if (clickedNode != boardGrid) {
-            ShogiGameEngine.getInstance().getGameBoard().gameLogic(clickedNode, boardGrid, statOutput, p1Timer, p2Timer);
+            GameEngine.getInstance().gameLogic(clickedNode, boardGrid, statOutput, p1Timer, p2Timer);
         }
     }
 
@@ -57,63 +50,16 @@ public class BoardController {
     }
 
     public void saveGame() {
-        Board.stopTimers();
-        GameData gameData = new GameData(Board.squares, ShogiGameEngine.getInstance().getGameBoard().getMoveHistory(), Board.isOpponentsTurn,
-                ShogiGameEngine.getInstance().getGameBoard().getPlayerOutPieces(), Board.player1Timer.getTimeLeft(), Board.player2Timer.getTimeLeft());
-
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("saveGame/gameSave.dat"))) {
-            oos.writeObject(gameData);
-            DialogUtils.showSuccessDialog("Game was successfully saved!");
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+        GameEngine.getInstance().getSaveAndLoadService().saveGame();
     }
 
     public void loadGame() {
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("saveGame/gameSave.dat"))) {
-            GameData gameData = (GameData) ois.readObject();
-            Square[][] squares = gameData.getGameState();
-
-            boardGrid.getChildren().clear();
-
-            for (int i = 0; i < 9; i++) {
-                for (int j = 0; j < 9; j++) {
-                    Board.setEmptyPieceOnBoard(boardGrid, i, j
-                    );
-                    Board.setPieceOnBoard(boardGrid, i, j, squares[i][j].getPiece()
-                    );
-                }
-            }
-
-            gameData.getMoveHistory().forEach(move -> statOutput.appendText(move));
-            ShogiGameEngine.getInstance().getGameBoard().setMoveHistory(gameData.getMoveHistory());
-            Board.isOpponentsTurn = gameData.getIsOpponentsTurn();
-            Board.gameStarted = true;
-            PlayerOutPieces playerOutPieces = gameData.getPlayerOutPieces();
-
-            playerOutPieces.getPlayer1().forEach((key, value) -> {
-                Label label = (Label) ShogiGameEngine.getInstance().getStage().getScene().lookup(key);
-                label.setText(value);
-            });
-            playerOutPieces.getPlayer2().forEach((key, value) -> {
-                Label label = (Label) ShogiGameEngine.getInstance().getStage().getScene().lookup(key);
-                label.setText(value);
-            });
-
-            Board.player1Timer = new PlayerTimer(gameData.getPlayer1Timer(), p1Timer,"Player 1 Timer");
-            Board.player2Timer = new PlayerTimer(gameData.getPlayer2Timer(), p2Timer,"Player 2 Timer");
-            Board.startTimer();
-            Board.switchTurn();
-
-            DialogUtils.showSuccessDialog("Game was successfully loaded!");
-        } catch (IOException | ClassNotFoundException ex) {
-            ex.printStackTrace();
-        }
+        GameEngine.getInstance().getSaveAndLoadService().loadGame(boardGrid, statOutput, p1Timer, p2Timer);
     }
 
     public void restartGame() {
         boardGrid.getChildren().clear();
-        Board.populateBoard(boardGrid);
+        GameEngine.getInstance().getBoardManager().populateBoard(boardGrid);
     }
 
 

@@ -1,6 +1,7 @@
 package tvz.ikolanovic.shogi.models.utils;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.*;
@@ -8,17 +9,18 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class DocumentationUtils {
 
+    public static final String ABSOLUTE_PATH = System.getProperty("user.dir");
+    public static final String DOC_PATH = "documentation/doc.html";
 
     public static void generateDocumentation() {
         StringBuilder documentationGenerator = new StringBuilder();
 
-        String path = "D:\\Korisnik\\Documents\\TVZ\\Shogi-Java2\\src\\main\\java";
-
-        try {
-            List<Path> classNameList = Files.walk(Paths.get(path))
+        try (Stream<Path> stream = Files.walk(Paths.get(ABSOLUTE_PATH))) {
+            List<Path> classNameList = stream
                     .filter(p -> p.getFileName().toString().endsWith(".java"))
                     .filter(p -> !p.getFileName().toString().equals("module-info.java"))
                     .toList();
@@ -110,22 +112,34 @@ public class DocumentationUtils {
         }
 
         String html = """
-            <!DOCTYPE html>
-            <html>
-            <head>
-            <title>Documentation</title>
-            </head>
-            <body>
-            <h1>GO Board Game Documentation</h1>
-            """
-                + documentationGenerator.toString() +
+                <!DOCTYPE html>
+                <html>
+                <head>
+                <title>Documentation</title>
+                </head>
+                <body>
+                <h1>GO Board Game Documentation</h1>
                 """
-                </body>
-                </html>
-                """;
+                + documentationGenerator +
+                """
+                        </body>
+                        </html>
+                        """;
 
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("documentation/doc.html"))) {
+        File file = new File(DOC_PATH);
+        File directory = file.getParentFile();
+        if (!directory.exists()) {
+            if (directory.mkdirs()) {
+                System.out.println("Directory created: " + directory.getPath());
+            } else {
+                System.err.println("Failed to create directory: " + directory.getPath());
+                return;
+            }
+        }
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
             writer.write(html);
+            System.out.println("File written successfully: " + DOC_PATH);
         } catch (IOException ex) {
             ex.printStackTrace();
         }

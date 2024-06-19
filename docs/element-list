@@ -1,7 +1,0 @@
-module:tvz.ikolanovic.shogi
-tvz.ikolanovic.shogi
-tvz.ikolanovic.shogi.controllers
-tvz.ikolanovic.shogi.engine
-tvz.ikolanovic.shogi.models
-tvz.ikolanovic.shogi.models.pieces
-tvz.ikolanovic.shogi.models.utils
